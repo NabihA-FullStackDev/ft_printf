@@ -1,0 +1,24 @@
+#ft_printf
+
+#Partie obligatoire
+• Vous devez recoder la fonction printf de la libc
+• Votre fonction s’appelera ft_printf et sera prototypée de la même façon que
+printf
+• Vous ne ferez pas la gestion de buffer présente dans la fonction printf de la libc.
+• Vous devez gérer les conversions suivantes : csp
+• Vous devez gérer les conversions suivantes : diouxX avec les flags hh, h, l, ll
+• Vous devez gérer la conversion suivante : f avec les flags l et L
+• Vous devez gérer le %%
+• Vous devez gérer les flags #0-+ et espace
+• Vous devez gérer la taille minimum du champ
+• Vous devez gérer la précision
+
+#Bonus Possible
+
+• Gestion de conversions plus délicates : e, g. Attention votre flag L doit être étendu
+à ces deux conversions pour que le bonus soit comptabilisé !
+• Gestion de flags plus delicats : *, $, ’
+• Gestion de flags non existants : %b pour afficher en binaire, %r pour afficher une
+chaine avec des caractères non imprimables, %k pour afficher une date à un format
+ISO quelconque, etc.
+• Gestion de modifieurs pour gérer les couleurs, les fd ou des choses fun comme ça :)
