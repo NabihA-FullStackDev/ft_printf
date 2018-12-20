@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 10:46:52 by jucapik           #+#    #+#             */
-/*   Updated: 2018/12/20 12:05:16 by jucapik          ###   ########.fr       */
+/*   Updated: 2018/12/20 16:33:20 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,48 @@
 #include <unistd.h>
 #include <stdio.h>
 
-static void	swap_print_string(char *to_print, int *pos, const char *format)
+static void	swap_print_string(char **to_print, int *pos, const char *format)
 {
 	char *tmp;
+	char	*ps;
 
-	tmp = ft_strjoin(to_print, print_string(format, pos));
-	free(to_print);
-	to_print = tmp;
+	ps = print_string(format, pos);
+	tmp = ft_strjoin(*to_print, ps);
+	free(*to_print);
+	free(ps);
+	*to_print = tmp;
 }
 
 /*
-** L'argument envoye a swap_print_param est deja l'element choisis
-*/
+ ** L'argument envoye a swap_print_param est deja l'element choisis
+ */
 
-static void	swap_print_param(char *to_print, int *pos, t_ctof *cf, t_param *p)
+static void	swap_print_param(char **to_print, t_ctof *cf, t_param *p)
 {
-	char *tmp;
+	char	*tmp;
+	char	*pp;
 
-	tmp = ft_strjoin(to_print, print_param(cf, p, pos));
-	free(to_print);
-	to_print = tmp;
+	pp = print_param(cf, p);
+	if (pp != NULL)
+	{
+		tmp = ft_strjoin(*to_print, pp);
+		free(*to_print);
+		*to_print = tmp;
+	}
+	free(pp);
 }
+
+int			modif_pos(int pos, const char *format)
+{
+	while (format[pos] != 'c' && format[pos] != 's' && format[pos] != 'p' &&
+			format[pos] != 'd' && format[pos] != 'i' && format[pos] != 'o' &&
+			format[pos] != 'u' && format[pos] != 'x' && format[pos] != 'X' &&
+			format[pos] != 'f' && format[pos] != '\0')
+		++pos;
+	++pos;
+	return (pos);
+}
+
 
 int			print_all(const char *format, t_ctof *ctof_tab, t_param *params)
 {
@@ -54,11 +75,12 @@ int			print_all(const char *format, t_ctof *ctof_tab, t_param *params)
 	nb_param = get_nb_param(format);
 	while (i < nb_param)
 	{
-		swap_print_string(to_print, &pos, format);
-		swap_print_param(to_print, &pos, ctof_tab, params + i);
+		swap_print_string(&to_print, &pos, format);
+		swap_print_param(&to_print, ctof_tab, params + i);
+		pos = modif_pos(pos, format);
 		++i;
 	}
-	swap_print_string(to_print, &pos, format);
+	swap_print_string(&to_print, &pos, format);
 	//free_ctof(ctof_tab);
 	//free_param(params);
 	size = ft_strlen(to_print);
@@ -69,7 +91,7 @@ int			print_all(const char *format, t_ctof *ctof_tab, t_param *params)
 int			ft_printf(const char *format, ...)
 {
 	t_ctof	*ctof_tab;
-	t_param		*params;
+	t_param	*params;
 	int		nb_param;
 	int		i;
 	va_list	ap;
@@ -86,5 +108,4 @@ int			ft_printf(const char *format, ...)
 	}
 	va_end(ap);
 	return (print_all(format, ctof_tab, params));
-	//return (0);
 }

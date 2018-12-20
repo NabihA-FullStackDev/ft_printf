@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 09:08:36 by jucapik           #+#    #+#             */
-/*   Updated: 2018/12/20 12:56:55 by jucapik          ###   ########.fr       */
+/*   Updated: 2018/12/20 15:50:09 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ t_ctof	*create_ctof(void); //renvois la table d'options a fonction
 void	free_ctof(t_ctof *tab);
 int		get_nb_param(const char *format);
 void	free_param(t_param *tab);
-char	*print_string(const char *str, int *pos);//renvois la taille imprime
-char	*print_param(t_ctof *ctof, t_param *param, int *pos);//renvois la taille imprime
+char	*print_string(const char *str, int *pos);
+char	*print_param(t_ctof *ctof, t_param *param);
 void	get_flag1(t_param *param, const char *format, int *i);
 void	get_flag2(t_param *param, const char *format, int *i);
 void	get_vals(t_param *param, const char *format, int *i);

@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 13:53:20 by jucapik           #+#    #+#             */
-/*   Updated: 2018/12/20 12:53:35 by jucapik          ###   ########.fr       */
+/*   Updated: 2018/12/20 16:44:56 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 
 char	*s_param(t_param *param)
 {
-	char	**s;
+	char	*s;
 
-	s = (char **)param->arg;
-	return (*s);
+	s = (char *)param->arg;
+	return (ft_strdup(s));
 }
