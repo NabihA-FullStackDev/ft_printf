@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 17:15:40 by jucapik           #+#    #+#             */
-/*   Updated: 2018/12/20 10:29:49 by jucapik          ###   ########.fr       */
+/*   Updated: 2018/12/21 10:27:59 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 static void	init_param(t_param *param)
 {
+	param->type = 'N';
 	param->hh = FALSE;
 	param->h = FALSE;
 	param->l = FALSE;
@@ -73,6 +74,7 @@ t_param		*create_param(const char *format)
 			//get_flag2(params + curr_param, format, &i);
 			//get_vals(params + curr_param, format, &i);
 			get_type(params + curr_param, format, &i);
+			curr_param++;
 		}
 		if (format[i] == '%' && format[i + 1] == '%')
 			++i;
