@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/16 12:04:21 by jucapik           #+#    #+#             */
-/*   Updated: 2018/12/22 15:06:08 by jucapik          ###   ########.fr       */
+/*   Updated: 2018/12/22 16:30:57 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ bln		get_flagopt(t_param *param, const char *format, int *i)
 		param->flags |= moins;
 	else if (format[*i] == '+')
 		param->flags |= plus;
-	else if (format[*i] == ' ')
+	else if (format[*i] == ' ' && param->type != 'p')
 		param->flags |= espace;
 	else
 	{
