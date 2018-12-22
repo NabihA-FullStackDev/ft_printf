@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 10:46:52 by jucapik           #+#    #+#             */
-/*   Updated: 2018/12/21 10:28:22 by jucapik          ###   ########.fr       */
+/*   Updated: 2018/12/22 15:34:57 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static void	swap_print_string(char **to_print, int *pos, const char *format)
 }
 
 /*
- ** L'argument envoye a swap_print_param est deja l'element choisis
- */
+** L'argument envoye a swap_print_param est deja l'element choisis
+*/
 
 static void	swap_print_param(char **to_print, t_ctof *cf, t_param *p)
 {
@@ -59,6 +59,31 @@ int			modif_pos(int pos, const char *format)
 	return (pos);
 }
 
+static void TESTFUN(t_param *param)
+{
+	if (param->flags & hh)
+		printf("hh options up for %d\n", param->id);
+	if (param->flags & h)
+		printf("h options up for %d\n", param->id);
+	if (param->flags & ll)
+		printf("ll options up for %d\n", param->id);
+	if (param->flags & l)
+		printf("l options up for %d\n", param->id);
+	if (param->flags & L)
+		printf("L options up for %d\n", param->id);
+	if (param->flags & hash)
+		printf("hash options up for %d\n", param->id);
+	if (param->flags & zero)
+		printf("zero options up for %d\n", param->id);
+	if (param->flags & moins)
+		printf("moins options up for %d\n", param->id);
+	if (param->flags & plus)
+		printf("plus options up for %d\n", param->id);
+	if (param->flags & espace)
+		printf("espace options up for %d\n", param->id);
+	printf("avant = %d de %d\n", param->avant, param->id);
+	printf("apres = %d de %d\n", param->apres, param->id);
+}
 
 int			print_all(const char *format, t_ctof *ctof_tab, t_param *params)
 {
@@ -78,6 +103,8 @@ int			print_all(const char *format, t_ctof *ctof_tab, t_param *params)
 		swap_print_string(&to_print, &pos, format);
 		swap_print_param(&to_print, ctof_tab, params + i);
 		pos = modif_pos(pos, format);
+		//TMP TEST
+		TESTFUN(params + i);
 		++i;
 	}
 	swap_print_string(&to_print, &pos, format);

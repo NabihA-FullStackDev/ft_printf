@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 09:08:36 by jucapik           #+#    #+#             */
-/*   Updated: 2018/12/20 15:50:09 by jucapik          ###   ########.fr       */
+/*   Updated: 2018/12/22 15:38:49 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,28 +20,27 @@ typedef	enum		boolean
 	TRUE = 1
 }					bln;
 
+typedef enum		s_flags
+{
+	hh = 1,
+	h = 2,
+	l = 4,
+	ll = 8,
+	L = 16,
+	hash = 32,
+	zero = 64,
+	moins = 128,
+	plus = 256,
+	espace = 512,
+}					t_flags;
+
 typedef struct		s_param
 {
 	int				id; //numero du parametre
 	char			type; //si c'est %c, %c, %p... etc
-	bln				hh; //indique que le nombre est en unsigned char
-	// ou en signed char
-	bln				h; //indique que le nombre est un short int ou unsigned short int
-	bln				l; //indique que le nombre est un long int ou unsigned long int
-	bln				ll; //pareille mais pour long long int ou unsigned long long int
-	bln				L; //pareille mais pour long double
-	bln				hash; //pour les nombres, indique qu'on doit convertir.
-	//On a donc 2 cas : %o ou il faudra rajouter un 0 au debut et
-	//%x ou%X ou il faudra ajouter 0x ou 0X au debut
-	bln				zero; //indique que le padding est fait par des 0 a la place
-	// d'espaces, (pour les nombres donc)
-	bln				moins; //indique que le padding est fait a droite au lieu
-	// de a gauche
-	bln				plus; //le signe '+' ou '-' doit etre indique avant le nombre
-	bln				espace; // un espace ou un '-' doit etre ibdique avant le nombre
+	int				flags;
 	int				avant;
 	int				apres;
-	int				sans;
 	void			*arg;
 }					t_param;
 
@@ -59,15 +58,15 @@ int		get_nb_param(const char *format);
 void	free_param(t_param *tab);
 char	*print_string(const char *str, int *pos);
 char	*print_param(t_ctof *ctof, t_param *param);
-void	get_flag1(t_param *param, const char *format, int *i);
-void	get_flag2(t_param *param, const char *format, int *i);
-void	get_vals(t_param *param, const char *format, int *i);
-void	get_type(t_param *param, const char *format, int *i);
+void	get_flaglen(t_param *param, const char *format, int *i);
+bln		get_flagopt(t_param *param, const char *format, int *i);
+bln		get_vals(t_param *param, const char *format, int *i);
+bln		get_type(t_param *param, const char *format, int *i);
 char	*c_param(t_param *param); //un caractere unique
 char	*s_param(t_param *param); //une chaine de caracteres
 char	*p_param(t_param *param); //un pointeur (en hexa)
-char	*d_param(t_param *param); //un double ou int (je suis pas sur)
-char	*i_param(t_param *param); // un int
+char	*d_param(t_param *param); //toujours int (je suis pas sur)
+char	*i_param(t_param *param); // peut convertir en octal ou decimal
 char	*o_param(t_param *param); // un unsigned octal
 char	*u_param(t_param *param); // un unsigned decimal
 char	*x_param(t_param *param); // un unsigned hexa (avce les lettres en petit)
