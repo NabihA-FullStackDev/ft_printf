@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 10:46:52 by jucapik           #+#    #+#             */
-/*   Updated: 2018/12/22 15:34:57 by jucapik          ###   ########.fr       */
+/*   Updated: 2018/12/22 15:42:19 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int			modif_pos(int pos, const char *format)
 	return (pos);
 }
 
-static void TESTFUN(t_param *param)
+/*static void TESTFUN(t_param *param)
 {
 	if (param->flags & hh)
 		printf("hh options up for %d\n", param->id);
@@ -83,7 +83,7 @@ static void TESTFUN(t_param *param)
 		printf("espace options up for %d\n", param->id);
 	printf("avant = %d de %d\n", param->avant, param->id);
 	printf("apres = %d de %d\n", param->apres, param->id);
-}
+}*/
 
 int			print_all(const char *format, t_ctof *ctof_tab, t_param *params)
 {
@@ -104,7 +104,7 @@ int			print_all(const char *format, t_ctof *ctof_tab, t_param *params)
 		swap_print_param(&to_print, ctof_tab, params + i);
 		pos = modif_pos(pos, format);
 		//TMP TEST
-		TESTFUN(params + i);
+		//TESTFUN(params + i);
 		++i;
 	}
 	swap_print_string(&to_print, &pos, format);
