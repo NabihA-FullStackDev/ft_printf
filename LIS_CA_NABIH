@@ -1,0 +1,5 @@
+alors en gros, y'a un truc de debug que j'ai enleve mais tu peut le remmetre si tu veut
+ca affiche tout les flags/precisions utilisees
+Alors si tu veut les remettre, tu va dans ft_printf.c, tu decommente la gross fonction TESTFUN avec tout les ifs et tu decommente //TESTFUN(params + i) dans la fonction en dessous
+vla
+j'espere que tu passe des bonnes vacances

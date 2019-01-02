@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 17:15:40 by jucapik           #+#    #+#             */
-/*   Updated: 2018/12/21 10:27:59 by jucapik          ###   ########.fr       */
+/*   Updated: 2018/12/22 15:02:50 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,20 @@
 static void	init_param(t_param *param)
 {
 	param->type = 'N';
-	param->hh = FALSE;
-	param->h = FALSE;
-	param->l = FALSE;
-	param->ll = FALSE;
-	param->L = FALSE;
-	param->hash = FALSE;
-	param->zero = FALSE;
-	param->moins = FALSE;
-	param->plus = FALSE;
-	param->avant = -1;
-	param->apres = -1;
-	param->sans = -1;
+	param->flags = 0;
+	param->avant = 0;
+	param->apres = 0;
+}
+
+static void	get_everything(t_param *params, int curr_param,
+		const char *format, int *i)
+{
+	while (get_flagopt(params + curr_param, format, i) != FALSE)
+		;
+	if (get_vals(params + curr_param, format, i) == TRUE)
+		get_vals(params + curr_param, format, i);
+	get_flaglen(params + curr_param, format, i);
+	get_type(params + curr_param, format, i);
 }
 
 int			get_nb_param(const char *format)
@@ -70,15 +72,13 @@ t_param		*create_param(const char *format)
 			++i;
 			init_param(params + curr_param);
 			params[curr_param].id = curr_param + 1;
-			//get_flag1(params + curr_param, format, &i);
-			//get_flag2(params + curr_param, format, &i);
-			//get_vals(params + curr_param, format, &i);
-			get_type(params + curr_param, format, &i);
+			get_everything(params, curr_param, format, &i);
 			curr_param++;
 		}
-		if (format[i] == '%' && format[i + 1] == '%')
+		else if (format[i] == '%' && format[i + 1] == '%')
+			i += 2;
+		else
 			++i;
-		++i;
 	}
 	return (params);
 }

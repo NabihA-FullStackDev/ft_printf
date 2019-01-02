@@ -1,31 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   maintest.c                                         :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/14 13:15:52 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/02 09:24:59 by jucapik          ###   ########.fr       */
+/*   Created: 2018/11/07 17:24:28 by jucapik           #+#    #+#             */
+/*   Updated: 2018/11/14 14:00:12 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <float.h>
+#include "libft.h"
 
-#include "ft_printf.h"
-#include "libft/libft.h"
-
-int		main()
+char	*ft_strstr(const char *hs, const char *needle)
 {
-	//char test[] = "test";
-	double 		shrt = -12.34;
-	char		*bidule = NULL;
+	int		i;
+	int		j;
 
-	ft_printf("abcde%5.5sfgi%c%cjklmn%s\n", NULL, '5', '5', "91011");
-	printf("null = %1s\n", bidule);
-	printf("oct? = %15.05f\n", shrt);
-	printf("oct? = %i\n", 012);
-	printf("oct? = %i\n", 0x12);
-	return (0);
+	if (*needle == '\0')
+		return ((char *)hs);
+	if (*hs == '\0')
+		return (NULL);
+	j = 0;
+	while (hs[j] != '\0')
+	{
+		if (hs[j] == needle[0])
+		{
+			i = 0;
+			while (hs[i + j] && needle[i] && hs[i + j] == needle[i])
+				i++;
+			if (needle[i] == '\0')
+				return ((char *)&(hs[j]));
+		}
+		j++;
+	}
+	return (NULL);
 }

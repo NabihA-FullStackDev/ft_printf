@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   maintest.c                                         :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/14 13:15:52 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/02 09:24:59 by jucapik          ###   ########.fr       */
+/*   Created: 2018/11/11 11:34:38 by jucapik           #+#    #+#             */
+/*   Updated: 2018/11/14 14:06:40 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <float.h>
+#include "libft.h"
 
-#include "ft_printf.h"
-#include "libft/libft.h"
-
-int		main()
+void	ft_putnbr(int nb)
 {
-	//char test[] = "test";
-	double 		shrt = -12.34;
-	char		*bidule = NULL;
-
-	ft_printf("abcde%5.5sfgi%c%cjklmn%s\n", NULL, '5', '5', "91011");
-	printf("null = %1s\n", bidule);
-	printf("oct? = %15.05f\n", shrt);
-	printf("oct? = %i\n", 012);
-	printf("oct? = %i\n", 0x12);
-	return (0);
+	if (nb == -2147483648)
+	{
+		ft_putchar('-');
+		ft_putchar('2');
+		nb = 147483648;
+	}
+	if (nb < 0)
+	{
+		ft_putchar('-');
+		nb *= -1;
+	}
+	if (nb > 9)
+	{
+		ft_putnbr(nb / 10);
+		ft_putnbr(nb % 10);
+	}
+	else
+		ft_putchar(nb + '0');
 }

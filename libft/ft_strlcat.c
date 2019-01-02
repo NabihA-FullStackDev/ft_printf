@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   maintest.c                                         :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/14 13:15:52 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/02 09:24:59 by jucapik          ###   ########.fr       */
+/*   Created: 2018/11/07 15:06:28 by jucapik           #+#    #+#             */
+/*   Updated: 2018/11/15 11:47:59 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <float.h>
+#include "libft.h"
 
-#include "ft_printf.h"
-#include "libft/libft.h"
-
-int		main()
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	//char test[] = "test";
-	double 		shrt = -12.34;
-	char		*bidule = NULL;
+	size_t i;
+	size_t sl;
+	size_t sd;
 
-	ft_printf("abcde%5.5sfgi%c%cjklmn%s\n", NULL, '5', '5', "91011");
-	printf("null = %1s\n", bidule);
-	printf("oct? = %15.05f\n", shrt);
-	printf("oct? = %i\n", 012);
-	printf("oct? = %i\n", 0x12);
-	return (0);
+	sl = ft_strlen(src);
+	sd = ft_strlen(dst);
+	i = 0;
+	if (size <= sd)
+		return (sl + size);
+	while (src[i] != '\0' && i < size - sd - 1)
+	{
+		dst[sd + i] = src[i];
+		i++;
+	}
+	if (i < size - sd)
+		dst[sd + i] = '\0';
+	return (sd + sl);
 }

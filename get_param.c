@@ -6,106 +6,101 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/16 12:04:21 by jucapik           #+#    #+#             */
-/*   Updated: 2018/12/21 10:28:25 by jucapik          ###   ########.fr       */
+/*   Updated: 2019/01/02 09:24:52 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft/libft.h"
 
-void	get_flag1(t_param *param, const char *format, int *i)
+#include <stdio.h>
+
+void	get_flaglen(t_param *param, const char *format, int *i)
 {
 	if (format[*i] == 'h' && format[(*i) + 1] == 'h')
 	{
-		param->hh = TRUE;
-		(*i) += 2;
+		param->flags |= hh;
+		(*i) += 1;
 	}
 	else if (format[*i] == 'h')
+		param->flags |= h;
+	else if (format[*i] == 'l' && format[(*i) + 1] == 'l')
 	{
-		param->h = TRUE;
+		param->flags |= ll;
 		(*i) += 1;
 	}
 	else if (format[*i] == 'l')
-	{
-		param->l = TRUE;
-		(*i) += 1;
-	}
-	else if (format[*i] == 'l' && format[(*i) + 1] == 'l')
-	{
-		param->ll = TRUE;
-		(*i) += 2;
-	}
+		param->flags |= l;
 	else if (format[*i] == 'L')
-	{
-		param->L = TRUE;
-		(*i) += 1;
-	}
+		param->flags |= L;
+	else
+		--(*i);
+	++(*i);
 }
 
-void	get_flag2(t_param *param, const char *format, int *i)
+bln		get_flagopt(t_param *param, const char *format, int *i)
 {
+	bln ret;
+
+	ret = TRUE;
 	if (format[*i] == '#')
+		param->flags |= hash;
+	else if (format[*i] == '0')
+		param->flags |= zero;
+	else if (format[*i] == '-')
+		param->flags |= moins;
+	else if (format[*i] == '+')
+		param->flags |= plus;
+	else if (format[*i] == ' ' && param->type != 'p')
+		param->flags |= espace;
+	else
 	{
-		param->hash = TRUE;
-		(*i) += 1;
+		--(*i);
+		ret = FALSE;
 	}
-	if (format[*i] == '0')
-	{
-		param->zero = TRUE;
-		(*i) += 1;
-	}
-	if (format[*i] == '-')
-	{
-		param->moins = TRUE;
-		(*i) += 1;
-	}
-	if (format[*i] == '+')
-	{
-		param->plus = TRUE;
-		(*i) += 1;
-	}
-	if (format[*i] == ' ')
-	{
-		param->espace = TRUE;
-		(*i) += 1;
-	}
-}	// Probably going to have to change this function,
-	// there can be more than one at a time of these parameters TODO
+	++(*i);
+	return (ret);
+}
+	// need to change parameters priorities  TODO
 
-void	get_vals(t_param *param, const char *format, int *i)
+bln		get_vals(t_param *param, const char *format, int *i)
 {
-	int		val;
-	int		check;
+	bln ret;
 
-	check = 0;
-	if (format[*i] == '.')
+	ret = TRUE;
+	if (format[*i] == '.' && format[(*i) + 1] >= '0' && format[(*i) + 1] <= '9')
 	{
-		++i;
-		check = 1;
-	}
-	if (format[*i] >= '1' && format[*i] <= '9')
-		val = ft_atoi(format + (*i));
-	while (format[*i] >= '0' && format[*i] <= '9')
 		++(*i);
-	if (check == 1)
-		param->avant = val;
-	if (format[*i] == '.')
+		param->apres = ft_atoi(format + (*i));
+		while (format[*i] >= '0' && format[*i] <= '9')
+			++(*i);
+	}
+	else if (format[*i] >= '0' && format[*i] <= '9')
 	{
-		check = 2;
-		++i;
+		param->avant = ft_atoi(format + (*i));
+		while (format[*i] >= '0' && format[*i] <= '9')
+			++(*i);
 	}
-	if (format[*i] >= '1' && format[*i] <= '9')
-		val = ft_atoi(format + (*i));
-	while (format[*i] >= '0' && format[*i] <= '9')
-		++(*i);
-	//PAS FINIS, la logique est pas bonne	
+	else
+		ret = FALSE;
+	return (ret);
 }
 
-void	get_type(t_param *param, const char *format, int *i)
+bln		get_type(t_param *param, const char *format, int *i)
 {
+	bln ret;
+
+	ret = TRUE;
 	if (format[*i] == 'c' || format[*i] == 's' || format[*i] == 'p' ||
 			format[*i] == 'd' || format[*i] == 'i' || format[*i] == 'o' ||
 			format[*i] == 'u' || format[*i] == 'x' || format[*i] == 'X' ||
 			format[*i] == 'f')
 		param->type = format[*i];
+	else
+	{
+		--(*i);
+		ret = FALSE;
+	}
+	++(*i);
+	return (ret);
 }

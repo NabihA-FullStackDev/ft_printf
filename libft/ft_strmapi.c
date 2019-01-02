@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   maintest.c                                         :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/14 13:15:52 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/02 09:24:59 by jucapik          ###   ########.fr       */
+/*   Created: 2018/11/10 14:51:04 by jucapik           #+#    #+#             */
+/*   Updated: 2018/11/14 14:02:31 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <float.h>
+#include "libft.h"
 
-#include "ft_printf.h"
-#include "libft/libft.h"
-
-int		main()
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	//char test[] = "test";
-	double 		shrt = -12.34;
-	char		*bidule = NULL;
+	char	*ret;
+	size_t	i;
+	size_t	lim;
 
-	ft_printf("abcde%5.5sfgi%c%cjklmn%s\n", NULL, '5', '5', "91011");
-	printf("null = %1s\n", bidule);
-	printf("oct? = %15.05f\n", shrt);
-	printf("oct? = %i\n", 012);
-	printf("oct? = %i\n", 0x12);
-	return (0);
+	if (s == NULL)
+		return (NULL);
+	lim = ft_strlen(s);
+	if ((ret = (char *)malloc(sizeof(char) * (lim + 1))) == NULL)
+		return (NULL);
+	i = 0;
+	while (i < lim)
+	{
+		ret[i] = f(i, s[i]);
+		i++;
+	}
+	ret[i] = '\0';
+	return (ret);
 }

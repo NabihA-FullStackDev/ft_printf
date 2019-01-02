@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   maintest.c                                         :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/14 13:15:52 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/02 09:24:59 by jucapik          ###   ########.fr       */
+/*   Created: 2018/11/09 12:55:17 by jucapik           #+#    #+#             */
+/*   Updated: 2018/11/12 16:37:10 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <float.h>
+#include "libft.h"
 
-#include "ft_printf.h"
-#include "libft/libft.h"
-
-int		main()
+int		ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	//char test[] = "test";
-	double 		shrt = -12.34;
-	char		*bidule = NULL;
+	unsigned char	*p1;
+	unsigned char	*p2;
+	size_t			i;
 
-	ft_printf("abcde%5.5sfgi%c%cjklmn%s\n", NULL, '5', '5', "91011");
-	printf("null = %1s\n", bidule);
-	printf("oct? = %15.05f\n", shrt);
-	printf("oct? = %i\n", 012);
-	printf("oct? = %i\n", 0x12);
+	if (n == 0)
+		return (0);
+	p1 = (unsigned char *)s1;
+	p2 = (unsigned char *)s2;
+	i = 0;
+	while (i < n)
+	{
+		if (p1[i] != p2[i])
+			return (p1[i] - p2[i]);
+		i++;
+	}
 	return (0);
 }
