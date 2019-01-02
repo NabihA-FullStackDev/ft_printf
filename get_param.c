@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/16 12:04:21 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/02 09:24:52 by jucapik          ###   ########.fr       */
+/*   Updated: 2019/01/02 11:32:52 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ bln		get_flagopt(t_param *param, const char *format, int *i)
 		param->flags |= hash;
 	else if (format[*i] == '0')
 		param->flags |= zero;
-	else if (format[*i] == '-')
+	else if (format[*i] == '-' &&
+			!(format[(*i) + 1] >= '0' && format[(*i) + 1] <= '9'))
 		param->flags |= moins;
 	else if (format[*i] == '+')
 		param->flags |= plus;
@@ -75,10 +76,11 @@ bln		get_vals(t_param *param, const char *format, int *i)
 		while (format[*i] >= '0' && format[*i] <= '9')
 			++(*i);
 	}
-	else if (format[*i] >= '0' && format[*i] <= '9')
+	else if ((format[*i] >= '0' && format[*i] <= '9') || (format[*i] == '-' &&
+				(format[(*i) + 1] >= '0' && format[(*i) + 1] <= '9')))
 	{
 		param->avant = ft_atoi(format + (*i));
-		while (format[*i] >= '0' && format[*i] <= '9')
+		while ((format[*i] >= '0' && format[*i] <= '9') || format[*i] == '-')
 			++(*i);
 	}
 	else
