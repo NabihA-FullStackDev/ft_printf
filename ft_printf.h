@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 09:08:36 by jucapik           #+#    #+#             */
-/*   Updated: 2018/12/22 15:38:49 by jucapik          ###   ########.fr       */
+/*   Updated: 2019/01/02 16:56:33 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ typedef struct		s_ctof //conv to function
 int		ft_printf(const char *format, ...);
 t_param	*create_param(const char *format);
 t_ctof	*create_ctof(void); //renvois la table d'options a fonction
-void	free_ctof(t_ctof *tab);
 int		get_nb_param(const char *format);
+void	free_ctof(t_ctof *ctof);
 void	free_param(t_param *tab);
 char	*print_string(const char *str, int *pos);
 char	*print_param(t_ctof *ctof, t_param *param);

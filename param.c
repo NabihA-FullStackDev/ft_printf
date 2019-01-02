@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 17:15:40 by jucapik           #+#    #+#             */
-/*   Updated: 2018/12/22 15:02:50 by jucapik          ###   ########.fr       */
+/*   Updated: 2019/01/02 15:59:58 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 #include <stdlib.h>
 
 #include <stdio.h>
+
+void    free_param(t_param *tab)
+{
+	free(tab);
+	tab = NULL;
+}
 
 static void	init_param(t_param *param)
 {

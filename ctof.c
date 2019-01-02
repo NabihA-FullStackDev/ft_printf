@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 12:41:03 by jucapik           #+#    #+#             */
-/*   Updated: 2018/12/20 10:29:16 by jucapik          ###   ########.fr       */
+/*   Updated: 2019/01/02 15:54:29 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,10 @@ t_ctof	*create_ctof(void)
 	ctof[9].f = &f_param;
 */	ctof[2].conv = 'N'; // A CHANGER OU METTRE NULL
 	return (ctof);
+}
+
+void    free_ctof(t_ctof *ctof)
+{
+	free(ctof);
+	ctof = NULL;
 }

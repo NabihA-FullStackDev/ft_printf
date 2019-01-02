@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 13:53:20 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/02 13:44:41 by jucapik          ###   ########.fr       */
+/*   Updated: 2019/01/02 16:56:28 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*cpytoret(char *d, char *s, size_t n)
 	size_t			i;
 
 	i = 0;
-	while (i < n && d)
+	while (i < n)
 	{
 		d[i] = s[i];
 		i++;
@@ -35,18 +35,23 @@ char	*s_param(t_param *param)
 	int		sizetomal;
 	char	*ret;
 	int		towrite;
+	int		abs_avant;
 
+	abs_avant = ft_abs(param->avant);
 	s = (param->arg == NULL) ? ft_strdup("(null)") : (char *)param->arg;
-	towrite = ((int)ft_strlen(s) > ft_abs(param->avant))
-		? ft_strlen(s) : ft_abs(param->avant);
-	sizetomal = (param->apres >= towrite) ? param->apres : towrite;
+	towrite = (param->apres > (int)ft_strlen(s) || param->apres != 0) ?
+		ft_strlen(s) : param->apres;
+	sizetomal = (abs_avant > towrite) ? abs_avant : towrite;
 	ret = (char *)malloc(sizeof(char) * (sizetomal + 1));
 	ft_memset((void *)ret, ' ', sizetomal);
-	if (towrite > param->apres && param->avant > 0)
-		cpytoret((void *)(ret + sizetomal - param->apres), (void *)s, towrite);
+	if (towrite < abs_avant && param->avant > 0)
+		cpytoret((ret + sizetomal - towrite), s, towrite);
 	else
-		cpytoret((void *)(ret), (void *)s, towrite);
+		cpytoret(ret, s, towrite);
 	ret[sizetomal] = '\0';
-	printf("DEBUG: ret = %s\n", ret);
+	if (param->arg == NULL)
+		free(s);
+	printf("DEBUG: ret = %s, towrite = %d, sizetomal = %d, avant = %d, apres = %d\n", 
+			ret, towrite, sizetomal, param->avant, param->apres);
 	return (ret);
 }

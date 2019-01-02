@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 10:46:52 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/02 11:33:31 by jucapik          ###   ########.fr       */
+/*   Updated: 2019/01/02 15:59:31 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,11 @@ int			print_all(const char *format, t_ctof *ctof_tab, t_param *params)
 		++i;
 	}
 	swap_print_string(&to_print, &pos, format);
-	//free_ctof(ctof_tab);
-	//free_param(params);
+	free_ctof(ctof_tab);
+	free_param(params);
 	size = ft_strlen(to_print);
 	write(1, to_print, size);
+	free(to_print);
 	return (size);
 }
 
