@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/16 12:04:21 by jucapik           #+#    #+#             */
-/*   Updated: 2018/12/22 16:30:57 by jucapik          ###   ########.fr       */
+/*   Updated: 2019/01/02 09:24:52 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ bln		get_flagopt(t_param *param, const char *format, int *i)
 	}
 	++(*i);
 	return (ret);
-}	// Probably going to have to change this function,
-	// there can be more than one at a time of these parameters TODO
+}
+	// need to change parameters priorities  TODO
 
 bln		get_vals(t_param *param, const char *format, int *i)
 {
