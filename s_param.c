@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 13:53:20 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/03 09:14:30 by jucapik          ###   ########.fr       */
+/*   Updated: 2019/01/03 09:17:16 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,5 @@ char	*s_param(t_param *param)
 	ret[sizetomal] = '\0';
 	if (param->arg == NULL)
 		free(s);
-	printf("DEBUG: ret = %s, towrite = %d, sizetomal = %d, avant = %d, apres = %d\n", 
-			ret, towrite, sizetomal, param->avant, param->apres);
 	return (ret);
 }
