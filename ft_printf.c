@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 10:46:52 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/02 15:59:31 by jucapik          ###   ########.fr       */
+/*   Updated: 2019/01/03 17:46:27 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static void	swap_print_string(char **to_print, int *pos, const char *format)
 	char	*ps;
 
 	ps = print_string(format, pos);
+	printf("\n\tps = %s", ps);
 	tmp = ft_strjoin(*to_print, ps);
 	free(*to_print);
 	free(ps);
@@ -30,8 +31,8 @@ static void	swap_print_string(char **to_print, int *pos, const char *format)
 }
 
 /*
-** L'argument envoye a swap_print_param est deja l'element choisis
-*/
+ ** L'argument envoye a swap_print_param est deja l'element choisis
+ */
 
 static void	swap_print_param(char **to_print, t_ctof *cf, t_param *p)
 {
@@ -39,12 +40,10 @@ static void	swap_print_param(char **to_print, t_ctof *cf, t_param *p)
 	char	*pp;
 
 	pp = print_param(cf, p);
-	if (pp != NULL)
-	{
-		tmp = ft_strjoin(*to_print, pp);
-		free(*to_print);
-		*to_print = tmp;
-	}
+	printf("\n\tpp = %s", pp);
+	tmp = ft_strjoin(*to_print, pp);
+	free(*to_print);
+	*to_print = tmp;
 	free(pp);
 }
 
@@ -61,28 +60,44 @@ int			modif_pos(int pos, const char *format)
 
 /*static void TESTFUN(t_param *param)
 {
+	printf("flags for param number %d:\n", param->id);
 	if (param->flags & hh)
-		printf("hh options up for %d\n", param->id);
+		printf("\thh options up for %d\n", param->id);
 	if (param->flags & h)
-		printf("h options up for %d\n", param->id);
+		printf("\th options up for %d\n", param->id);
 	if (param->flags & ll)
-		printf("ll options up for %d\n", param->id);
+		printf("\tll options up for %d\n", param->id);
 	if (param->flags & l)
-		printf("l options up for %d\n", param->id);
+		printf("\tl options up for %d\n", param->id);
 	if (param->flags & L)
-		printf("L options up for %d\n", param->id);
+		printf("\tL options up for %d\n", param->id);
 	if (param->flags & hash)
-		printf("hash options up for %d\n", param->id);
+		printf("\thash options up for %d\n", param->id);
 	if (param->flags & zero)
-		printf("zero options up for %d\n", param->id);
+		printf("\tzero options up for %d\n", param->id);
 	if (param->flags & moins)
-		printf("moins options up for %d\n", param->id);
+		printf("\tmoins options up for %d\n", param->id);
 	if (param->flags & plus)
-		printf("plus options up for %d\n", param->id);
+		printf("\tplus options up for %d\n", param->id);
 	if (param->flags & espace)
-		printf("espace options up for %d\n", param->id);
-	printf("avant = %d de %d\n", param->avant, param->id);
-	printf("apres = %d de %d\n", param->apres, param->id);
+		printf("\tespace options up for %d\n", param->id);
+	if (param->avant != 0)
+		printf("\tavant = %d de %d\n", param->avant, param->id);
+	if (param->apres != 0)
+		printf("\tapres = %d de %d\n", param->apres, param->id);
+	printf("\tflags = ");
+	int c = 9, k, n = param->flags;
+	while (c >= 0)
+	{
+		k = n >> c;
+
+		if (k & 1)
+			printf("1");
+		else
+			printf("0");
+		c--;
+	}
+	printf("\n");
 }*/
 
 int			print_all(const char *format, t_ctof *ctof_tab, t_param *params)
@@ -104,10 +119,12 @@ int			print_all(const char *format, t_ctof *ctof_tab, t_param *params)
 		swap_print_param(&to_print, ctof_tab, params + i);
 		pos = modif_pos(pos, format);
 		//TMP TEST
-		//TESTFUN(params + i);
+		//		TESTFUN(params + i);
+		printf("\nto_print = %s", to_print);
 		++i;
 	}
 	swap_print_string(&to_print, &pos, format);
+	printf("\nto_print = %s", to_print);
 	free_ctof(ctof_tab);
 	free_param(params);
 	size = ft_strlen(to_print);
