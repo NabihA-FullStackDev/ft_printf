@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 13:53:20 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/02 16:56:28 by jucapik          ###   ########.fr       */
+/*   Updated: 2019/01/03 09:14:30 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*s_param(t_param *param)
 
 	abs_avant = ft_abs(param->avant);
 	s = (param->arg == NULL) ? ft_strdup("(null)") : (char *)param->arg;
-	towrite = (param->apres > (int)ft_strlen(s) || param->apres != 0) ?
+	towrite = (param->apres > (int)ft_strlen(s) || param->apres == 0) ?
 		ft_strlen(s) : param->apres;
 	sizetomal = (abs_avant > towrite) ? abs_avant : towrite;
 	ret = (char *)malloc(sizeof(char) * (sizetomal + 1));
