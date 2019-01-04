@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 10:46:52 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/04 09:33:22 by jucapik          ###   ########.fr       */
+/*   Updated: 2019/01/04 10:07:38 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,13 @@ int			ft_printf(const char *format, ...)
 	va_start(ap, format);
 	while (i < nb_param)
 	{
-		params[i].arg = (void *)va_arg(ap, long long int);
+		if (params[i].type != 'f')
+			params[i].arg = (void *)va_arg(ap, void *);
+		else
+		{
+			params[i].arg = NULL;
+			params[i].dbl = (double)va_arg(ap, double);
+		}
 		++i;
 	}
 	va_end(ap);
