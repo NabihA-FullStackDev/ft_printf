@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/16 12:04:21 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/03 17:06:03 by jucapik          ###   ########.fr       */
+/*   Updated: 2019/01/04 09:31:07 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,17 +111,14 @@ bln				get_type(t_param *param, const char *format, int *i)
 {
 	bln ret;
 
-	ret = TRUE;
 	if (format[*i] == 'c' || format[*i] == 's' || format[*i] == 'p' ||
 			format[*i] == 'd' || format[*i] == 'i' || format[*i] == 'o' ||
 			format[*i] == 'u' || format[*i] == 'x' || format[*i] == 'X' ||
 			format[*i] == 'f')
-		param->type = format[*i];
+		ret = TRUE;
 	else
-	{
-		param->type = '\0';
 		ret = FALSE;
-	}
+	param->type = format[*i];
 	// a ajouter quand les options d,i,o... sont ajoutes TODO
 	//if (checkwholenum(param) == TRUE && param->avant != 0)
 	//	param->flags &= ~zero;

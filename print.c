@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 09:27:38 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/03 18:17:05 by jucapik          ###   ########.fr       */
+/*   Updated: 2019/01/04 09:31:22 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,16 @@ static char	*ft_strndupspe(const char *s1, size_t n)
 	return (dest);
 }
 
+static char		*chartostr(char c)
+{
+	char *ret;
+
+	ret = (char *)malloc(sizeof(char) * 2);
+	ret[0] = c;
+	ret[1] = '\0';
+	return (ret);
+}
+
 char		*print_string(const char *str, int *pos)
 {
 	int size;
@@ -78,9 +88,6 @@ char		*print_param(t_ctof *ctof, t_param *param)
 	while (ctof[i].conv != param->type && ctof[i].conv != 'N')
 		i++;
 	if (ctof[i].conv == 'N')
-	{
-		//printf("\nONYEST\n");
-		return (ft_strdup("TEST"));
-	}
+		return (chartostr(param->type));
 	return (ctof[i].f(param));
 }

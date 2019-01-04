@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 10:46:52 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/03 18:16:30 by jucapik          ###   ########.fr       */
+/*   Updated: 2019/01/04 09:33:22 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,11 @@ static void	swap_print_string(char **to_print, int *pos, const char *format)
 	char	*ps;
 
 	ps = print_string(format, pos);
-	printf("\n\tps = %s", ps);
 	tmp = ft_strjoin(*to_print, ps);
 	free(*to_print);
 	free(ps);
 	*to_print = tmp;
 }
-
-/*
- ** L'argument envoye a swap_print_param est deja l'element choisis
- */
 
 static void	swap_print_param(char **to_print, t_ctof *cf, t_param *p)
 {
@@ -40,7 +35,6 @@ static void	swap_print_param(char **to_print, t_ctof *cf, t_param *p)
 	char	*pp;
 
 	pp = print_param(cf, p);
-	printf("\n\tpp = %s", pp);
 	tmp = ft_strjoin(*to_print, pp);
 	free(*to_print);
 	*to_print = tmp;
@@ -49,12 +43,12 @@ static void	swap_print_param(char **to_print, t_ctof *cf, t_param *p)
 
 int			modif_pos(int pos, const char *format)
 {
-	while (format[pos] != 'c' && format[pos] != 's' && format[pos] != 'p' &&
-			format[pos] != 'd' && format[pos] != 'i' && format[pos] != 'o' &&
-			format[pos] != 'u' && format[pos] != 'x' && format[pos] != 'X' &&
-			format[pos] != 'f' && format[pos] != '\0')
+	while (format[pos] == '#' || format[pos] == '-' || format[pos] == '+'
+			|| format[pos] == '0')
 		++pos;
-	++pos;
+	while ((format[pos] >= '0' && format[pos] <= '9') || format[pos] == '.')
+		++pos;
+	pos += 2;
 	return (pos);
 }
 
@@ -120,11 +114,9 @@ int			print_all(const char *format, t_ctof *ctof_tab, t_param *params)
 		pos = modif_pos(pos, format);
 		//TMP TEST
 		//		TESTFUN(params + i);
-		printf("\nto_print = %s", to_print);
 		++i;
 	}
 	swap_print_string(&to_print, &pos, format);
-	printf("\nto_print = %s", to_print);
 	free_ctof(ctof_tab);
 	free_param(params);
 	size = ft_strlen(to_print);
