@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/16 12:04:21 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/04 09:31:07 by jucapik          ###   ########.fr       */
+/*   Updated: 2019/01/07 12:54:32 by naali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ bln				get_flagopt(t_param *param, const char *format, int *i)
 	}
 	else if (format[*i] == '+')
 	{
-		param->flags &= ~espace;	
+		param->flags &= ~espace;
 		param->flags |= plus;
 	}
 	else if (format[*i] == ' ')
@@ -119,6 +119,10 @@ bln				get_type(t_param *param, const char *format, int *i)
 	else
 		ret = FALSE;
 	param->type = format[*i];
+	if (param->apres == -1 && param->type == 'f')
+		param->apres = 6;
+	else if (param->apres == -1 && param->type != 'f')
+		param->apres = 0;
 	// a ajouter quand les options d,i,o... sont ajoutes TODO
 	//if (checkwholenum(param) == TRUE && param->avant != 0)
 	//	param->flags &= ~zero;

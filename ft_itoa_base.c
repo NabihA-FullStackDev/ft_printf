@@ -6,7 +6,7 @@
 /*   By: naali <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/21 11:55:29 by naali             #+#    #+#             */
-/*   Updated: 2019/01/07 12:16:20 by naali            ###   ########.fr       */
+/*   Updated: 2019/01/07 13:27:14 by naali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,73 @@ void		init_nb(t_itoa *n, t_param *nb, int base)
 	n->szbs = base;
 }
 
+/* char		*convert_dblparam(t_itoa *n, int base) */
+/* { */
+/* 	double		res; */
+/* 	char		*tmp1; */
+/* 	char		*tmp2; */
+
+/* 	res = (n.nb->dbl / 1); */
+/* 	i = (int)res; */
+/* 	n.nb->dbl = (n.nb->dbl - res) * 10; */
+/* 	tmp1 = ft_itoa(i); */
+/* 	tmp2 = tmp1; */
+/* 	if (n.nb->apres != 0) */
+/* 	{ */
+/* 		tmp1 = ft_strjoin(tmp1, "."); */
+/* 		if (tmp2 != NULL) */
+/* 			free(tmp2); */
+/* 	} */
+/* 	while (i < n.nb->apres) */
+/* 	{ */
+/* 		res = (n.nb->dbl / 1); */
+/* 		i = (int)res; */
+/* 		n.nb->dbl = (n.nb->dbl - res) * 10; */
+/* 		tmp2 = tmp1; */
+/* 		ft_strjoin(tmp1, ft_itoa(i)); */
+/* 		if (tmp2 != NULL) */
+/* 			free(tmp2); */
+/* 		i = i + 1; */
+/* 	} */
+/* 	return (tmp1); */
+/* } */
+
 char		*convert_param_for_itoa(t_param *nb, int base)
 {
+	int			i;
 	t_itoa		n;
+	double		res;
+	char		*tmp1;
+	char		*tmp2;
 
+	i = 0;
 	init_nb(&n, nb, base);
 	if (n.nb->type == 'd' || n.nb->type == 'i' || n.nb->type == 'x' || n.nb->type == 'X')
-	{
-		printf("printf %d\n", (int)(n.nb->arg));
 		return (ft_itoa_base((int)(n.nb->arg), &n, n.szbs));
-	}
 	else if (n.nb->type == 'f')
 	{
-		printf("printf %f\n", n.nb->dbl);
-		return (ft_strdup("double"));
+		res = (n.nb->dbl / 1);
+		n.nb->dbl = (n.nb->dbl - (int)res) * 10;
+		tmp1 = ft_itoa((int)res);
+		tmp2 = tmp1;
+		if (n.nb->apres != 0)
+		{
+			tmp1 = ft_strjoin(tmp1, ".");
+			if (tmp2 != NULL)
+				free(tmp2);
+		}
+		while (i < n.nb->apres)
+		{
+			res = (n.nb->dbl / 1);
+			n.nb->dbl = (n.nb->dbl - (int)res) * 10;
+			tmp2 = tmp1;
+			tmp1 = ft_strjoin(tmp1, ft_itoa((int)res));
+			if (tmp2 != NULL)
+				free(tmp2);
+			i = i + 1;
+		}
+		printf("\ntmp1 = %s\n", tmp1);
+		return (tmp1);
 	}
 	return (NULL);
 }

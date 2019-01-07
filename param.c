@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 17:15:40 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/03 14:36:22 by jucapik          ###   ########.fr       */
+/*   Updated: 2019/01/07 12:53:49 by naali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	init_param(t_param *param)
 	param->type = 'N';
 	param->flags = 0;
 	param->avant = 0;
-	param->apres = 0;
+	param->apres = -1;
 }
 
 static bln	get_everything(t_param *params, int curr_param,
