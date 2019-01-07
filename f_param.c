@@ -6,7 +6,7 @@
 /*   By: naali <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/03 13:34:12 by naali             #+#    #+#             */
-/*   Updated: 2019/01/03 17:27:46 by naali            ###   ########.fr       */
+/*   Updated: 2019/01/07 11:30:04 by naali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@ char		*f_param(t_param *p)
 {
 	char	*nbr;
 
-	nbr = ft_itoa_base(p, 10);
+	nbr = convert_param_for_itoa(p, 10);
 	return (nbr);
 }

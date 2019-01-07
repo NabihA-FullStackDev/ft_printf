@@ -6,7 +6,7 @@
 /*   By: naali <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/21 12:03:02 by naali             #+#    #+#             */
-/*   Updated: 2019/01/03 17:39:22 by naali            ###   ########.fr       */
+/*   Updated: 2019/01/07 12:14:00 by naali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,16 @@
 
 typedef struct		s_itoa
 {
+	int				dbl;
 	t_param			*nb;
 	char			*base;
-	unsigned int	szbs;
+	int				szbs;
+	int				mod;
+	int				signe;
+	int				size;
 }					t_itoa;
 
-char		*ft_itoa_base(t_param *nb, unsigned int base);
+char		*convert_param_for_itoa(t_param *nb, int base);
+char		*ft_itoa_base(int nb, t_itoa *tools, int base);
 
 #endif
