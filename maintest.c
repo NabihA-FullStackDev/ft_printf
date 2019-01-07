@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 13:15:52 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/07 13:28:06 by naali            ###   ########.fr       */
+/*   Updated: 2019/01/07 13:45:43 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ int		main()
 	i = 5;
 	f = 42.424242424242;
 /* 	ft_printf("abcde --> %5.2s <-- fgi --> %c %c <-- jklmn --> %s <--\n", NULL, '5', '5', "91011"); */
-	ft_printf("--> %d <--\n", i);
-	ft_printf("--> %x <--\n", i+42);
-	ft_printf("--> %X <--\n", i+42);
-	ft_printf("--> %.125f <--\n", f);
-	printf("--> %.125f <--\n", f);
+	//ft_printf("--> %d <--\n", i);
+	//ft_printf("--> %x <--\n", i+42);
+	//ft_printf("--> %X <--\n", i+42);
+	ft_printf("--> %10.125f <--\n", f);
+	//printf("--> %.125f <--\n", f);
 /* 	printf("null = %1s\n", bidule); */
 /* 	printf("oct? = %15.05f\n", shrt); */
 /* 	printf("oct? = %i\n", 012); */
