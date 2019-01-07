@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 10:46:52 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/07 13:53:59 by jucapik          ###   ########.fr       */
+/*   Updated: 2019/01/07 13:57:42 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static void	swap_print_string(char **to_print, int *pos, const char *format)
 
 	ps = print_string(format, pos);
 	tmp = ft_strjoin(*to_print, ps);
-	printf("ps = %s\n", ps);
 	free(*to_print);
 	free(ps);
 	*to_print = tmp;
@@ -37,7 +36,6 @@ static void	swap_print_param(char **to_print, t_ctof *cf, t_param *p)
 
 	pp = print_param(cf, p);
 	tmp = ft_strjoin(*to_print, pp);
-	printf("pp = %s\n", pp);
 	free(*to_print);
 	*to_print = tmp;
 	free(pp);
