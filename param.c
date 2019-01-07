@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 17:15:40 by jucapik           #+#    #+#             */
-/*   Updated: 2018/12/22 15:02:50 by jucapik          ###   ########.fr       */
+/*   Updated: 2019/01/03 14:36:22 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 #include <stdlib.h>
 
 #include <stdio.h>
+
+void		free_param(t_param *tab)
+{
+	free(tab);
+	tab = NULL;
+}
 
 static void	init_param(t_param *param)
 {
@@ -23,7 +29,7 @@ static void	init_param(t_param *param)
 	param->apres = 0;
 }
 
-static void	get_everything(t_param *params, int curr_param,
+static bln	get_everything(t_param *params, int curr_param,
 		const char *format, int *i)
 {
 	while (get_flagopt(params + curr_param, format, i) != FALSE)
@@ -31,7 +37,9 @@ static void	get_everything(t_param *params, int curr_param,
 	if (get_vals(params + curr_param, format, i) == TRUE)
 		get_vals(params + curr_param, format, i);
 	get_flaglen(params + curr_param, format, i);
-	get_type(params + curr_param, format, i);
+	if (get_type(params + curr_param, format, i) == FALSE)
+		return (FALSE);
+	return (TRUE);
 }
 
 int			get_nb_param(const char *format)
@@ -43,12 +51,8 @@ int			get_nb_param(const char *format)
 	nb_param = 0;
 	while (format[i] != '\0')
 	{
-		if (format[i] == '%')
-		{
-			++i;
-			if (format[i] != '%')
-				++nb_param;
-		}
+		if (format[i] == '%' && format[i + 1] != '%' && format[i - 1] != '%')
+			++nb_param;
 		++i;
 	}
 	return (nb_param);
@@ -67,7 +71,7 @@ t_param		*create_param(const char *format)
 	curr_param = 0;
 	while (format[i] != '\0')
 	{
-		if (format[i] == '%' && format[i + 1] != '%')
+		if (format[i] == '%' && format[i + 1] != '%' && format[i - 1] != '%')
 		{
 			++i;
 			init_param(params + curr_param);

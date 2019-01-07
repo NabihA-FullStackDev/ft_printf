@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 10:46:52 by jucapik           #+#    #+#             */
-/*   Updated: 2018/12/22 15:42:19 by jucapik          ###   ########.fr       */
+/*   Updated: 2019/01/04 10:07:38 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,60 +29,69 @@ static void	swap_print_string(char **to_print, int *pos, const char *format)
 	*to_print = tmp;
 }
 
-/*
-** L'argument envoye a swap_print_param est deja l'element choisis
-*/
-
 static void	swap_print_param(char **to_print, t_ctof *cf, t_param *p)
 {
 	char	*tmp;
 	char	*pp;
 
 	pp = print_param(cf, p);
-	if (pp != NULL)
-	{
-		tmp = ft_strjoin(*to_print, pp);
-		free(*to_print);
-		*to_print = tmp;
-	}
+	tmp = ft_strjoin(*to_print, pp);
+	free(*to_print);
+	*to_print = tmp;
 	free(pp);
 }
 
 int			modif_pos(int pos, const char *format)
 {
-	while (format[pos] != 'c' && format[pos] != 's' && format[pos] != 'p' &&
-			format[pos] != 'd' && format[pos] != 'i' && format[pos] != 'o' &&
-			format[pos] != 'u' && format[pos] != 'x' && format[pos] != 'X' &&
-			format[pos] != 'f' && format[pos] != '\0')
+	while (format[pos] == '#' || format[pos] == '-' || format[pos] == '+'
+			|| format[pos] == '0')
 		++pos;
-	++pos;
+	while ((format[pos] >= '0' && format[pos] <= '9') || format[pos] == '.')
+		++pos;
+	pos += 2;
 	return (pos);
 }
 
 /*static void TESTFUN(t_param *param)
 {
+	printf("flags for param number %d:\n", param->id);
 	if (param->flags & hh)
-		printf("hh options up for %d\n", param->id);
+		printf("\thh options up for %d\n", param->id);
 	if (param->flags & h)
-		printf("h options up for %d\n", param->id);
+		printf("\th options up for %d\n", param->id);
 	if (param->flags & ll)
-		printf("ll options up for %d\n", param->id);
+		printf("\tll options up for %d\n", param->id);
 	if (param->flags & l)
-		printf("l options up for %d\n", param->id);
+		printf("\tl options up for %d\n", param->id);
 	if (param->flags & L)
-		printf("L options up for %d\n", param->id);
+		printf("\tL options up for %d\n", param->id);
 	if (param->flags & hash)
-		printf("hash options up for %d\n", param->id);
+		printf("\thash options up for %d\n", param->id);
 	if (param->flags & zero)
-		printf("zero options up for %d\n", param->id);
+		printf("\tzero options up for %d\n", param->id);
 	if (param->flags & moins)
-		printf("moins options up for %d\n", param->id);
+		printf("\tmoins options up for %d\n", param->id);
 	if (param->flags & plus)
-		printf("plus options up for %d\n", param->id);
+		printf("\tplus options up for %d\n", param->id);
 	if (param->flags & espace)
-		printf("espace options up for %d\n", param->id);
-	printf("avant = %d de %d\n", param->avant, param->id);
-	printf("apres = %d de %d\n", param->apres, param->id);
+		printf("\tespace options up for %d\n", param->id);
+	if (param->avant != 0)
+		printf("\tavant = %d de %d\n", param->avant, param->id);
+	if (param->apres != 0)
+		printf("\tapres = %d de %d\n", param->apres, param->id);
+	printf("\tflags = ");
+	int c = 9, k, n = param->flags;
+	while (c >= 0)
+	{
+		k = n >> c;
+
+		if (k & 1)
+			printf("1");
+		else
+			printf("0");
+		c--;
+	}
+	printf("\n");
 }*/
 
 int			print_all(const char *format, t_ctof *ctof_tab, t_param *params)
@@ -104,14 +113,15 @@ int			print_all(const char *format, t_ctof *ctof_tab, t_param *params)
 		swap_print_param(&to_print, ctof_tab, params + i);
 		pos = modif_pos(pos, format);
 		//TMP TEST
-		//TESTFUN(params + i);
+		//		TESTFUN(params + i);
 		++i;
 	}
 	swap_print_string(&to_print, &pos, format);
-	//free_ctof(ctof_tab);
-	//free_param(params);
+	free_ctof(ctof_tab);
+	free_param(params);
 	size = ft_strlen(to_print);
 	write(1, to_print, size);
+	free(to_print);
 	return (size);
 }
 
@@ -130,7 +140,13 @@ int			ft_printf(const char *format, ...)
 	va_start(ap, format);
 	while (i < nb_param)
 	{
-		params[i].arg = (void *)va_arg(ap, long long int);
+		if (params[i].type != 'f')
+			params[i].arg = (void *)va_arg(ap, void *);
+		else
+		{
+			params[i].arg = NULL;
+			params[i].dbl = (double)va_arg(ap, double);
+		}
 		++i;
 	}
 	va_end(ap);

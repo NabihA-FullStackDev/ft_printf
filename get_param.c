@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/16 12:04:21 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/02 09:24:52 by jucapik          ###   ########.fr       */
+/*   Updated: 2019/01/04 09:31:07 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include <stdio.h>
 
-void	get_flaglen(t_param *param, const char *format, int *i)
+void			get_flaglen(t_param *param, const char *format, int *i)
 {
 	if (format[*i] == 'h' && format[(*i) + 1] == 'h')
 	{
@@ -38,7 +38,7 @@ void	get_flaglen(t_param *param, const char *format, int *i)
 	++(*i);
 }
 
-bln		get_flagopt(t_param *param, const char *format, int *i)
+bln				get_flagopt(t_param *param, const char *format, int *i)
 {
 	bln ret;
 
@@ -46,13 +46,25 @@ bln		get_flagopt(t_param *param, const char *format, int *i)
 	if (format[*i] == '#')
 		param->flags |= hash;
 	else if (format[*i] == '0')
-		param->flags |= zero;
+	{
+		if (!(param->flags & moins))
+			param->flags |= zero;
+	}
 	else if (format[*i] == '-')
+	{
+		param->flags &= ~zero;
 		param->flags |= moins;
+	}
 	else if (format[*i] == '+')
+	{
+		param->flags &= ~espace;	
 		param->flags |= plus;
-	else if (format[*i] == ' ' && param->type != 'p')
-		param->flags |= espace;
+	}
+	else if (format[*i] == ' ')
+	{
+		if (param->type != 'p' && !(param->flags & plus))
+			param->flags |= espace;
+	}
 	else
 	{
 		--(*i);
@@ -61,9 +73,8 @@ bln		get_flagopt(t_param *param, const char *format, int *i)
 	++(*i);
 	return (ret);
 }
-	// need to change parameters priorities  TODO
 
-bln		get_vals(t_param *param, const char *format, int *i)
+bln				get_vals(t_param *param, const char *format, int *i)
 {
 	bln ret;
 
@@ -75,10 +86,12 @@ bln		get_vals(t_param *param, const char *format, int *i)
 		while (format[*i] >= '0' && format[*i] <= '9')
 			++(*i);
 	}
-	else if (format[*i] >= '0' && format[*i] <= '9')
+	else if ((format[*i] >= '0' && format[*i] <= '9'))
 	{
 		param->avant = ft_atoi(format + (*i));
-		while (format[*i] >= '0' && format[*i] <= '9')
+		if (param->flags & moins)
+			param->avant *= -1;
+		while ((format[*i] >= '0' && format[*i] <= '9') || format[*i] == '-')
 			++(*i);
 	}
 	else
@@ -86,21 +99,29 @@ bln		get_vals(t_param *param, const char *format, int *i)
 	return (ret);
 }
 
-bln		get_type(t_param *param, const char *format, int *i)
+bln		checkwholenum(t_param *param)
+{
+	if (param->type == 'd' || param->type == 'i' || param->type == 'o' ||
+			param->type == 'u' || param->type == 'x' || param->type == 'X')
+		return (TRUE);
+	return (FALSE);
+}
+
+bln				get_type(t_param *param, const char *format, int *i)
 {
 	bln ret;
 
-	ret = TRUE;
 	if (format[*i] == 'c' || format[*i] == 's' || format[*i] == 'p' ||
 			format[*i] == 'd' || format[*i] == 'i' || format[*i] == 'o' ||
 			format[*i] == 'u' || format[*i] == 'x' || format[*i] == 'X' ||
 			format[*i] == 'f')
-		param->type = format[*i];
+		ret = TRUE;
 	else
-	{
-		--(*i);
 		ret = FALSE;
-	}
+	param->type = format[*i];
+	// a ajouter quand les options d,i,o... sont ajoutes TODO
+	//if (checkwholenum(param) == TRUE && param->avant != 0)
+	//	param->flags &= ~zero;
 	++(*i);
 	return (ret);
 }
