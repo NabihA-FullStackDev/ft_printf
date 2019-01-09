@@ -6,7 +6,7 @@
 /*   By: naali <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/21 12:03:02 by naali             #+#    #+#             */
-/*   Updated: 2019/01/07 12:14:00 by naali            ###   ########.fr       */
+/*   Updated: 2019/01/09 15:48:58 by naali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,23 @@
 # define BASEX "0123456789ABCDEF"
 # define BASEx "0123456789abcdef"
 
+typedef long long int t_lli;
+typedef unsigned long long int t_ulli;
+
 typedef struct		s_itoa
 {
 	int				dbl;
 	t_param			*nb;
-	char			*base;
-	int				szbs;
-	int				mod;
-	int				signe;
 	int				size;
+	int				signe;
+	t_lli			smod;
+	t_ulli			umod;
+	int				szbs;
+	char			*base;
 }					t_itoa;
 
 char		*convert_param_for_itoa(t_param *nb, int base);
-char		*ft_itoa_base(int nb, t_itoa *tools, int base);
+char		*ft_itoa_base(t_lli nb, t_itoa *tools, t_lli base);
+char		*ft_itoa_base_uns(t_ulli nb, t_itoa *tools, t_ulli base);
 
 #endif

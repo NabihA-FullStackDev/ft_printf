@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
+/*   ft_itoa_base_uns.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: naali <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/21 11:55:29 by naali             #+#    #+#             */
-/*   Updated: 2019/01/09 15:44:55 by naali            ###   ########.fr       */
+/*   Created: 2019/01/09 15:09:12 by naali             #+#    #+#             */
+/*   Updated: 2019/01/09 15:45:58 by naali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 #include "ft_printf.h"
 #include "ft_itoa_base.h"
 
-static void		get_nb_size(t_lli nb, t_lli *mod, int *size, t_lli base)
+static void		get_nb_size_uns(t_ulli nb, t_ulli *mod, int *size, t_ulli base)
 {
 	*mod = 1;
 	*size = 1;
-	while (nb < -(base - 1))
+	while (nb > (base - 1))
 	{
 		nb = nb / base;
 		*mod = *mod * base;
@@ -27,7 +27,7 @@ static void		get_nb_size(t_lli nb, t_lli *mod, int *size, t_lli base)
 	}
 }
 
-static char		*convert_nb(int nb, t_itoa *t, t_lli base, char *b)
+static char		*convert_nb_uns(t_ulli nb, t_itoa *t, t_ulli base, char *b)
 {
 	int			i;
 	char		*n;
@@ -35,34 +35,26 @@ static char		*convert_nb(int nb, t_itoa *t, t_lli base, char *b)
 	i = 0;
 	if ((n = (char*)malloc(sizeof(char) * (t->size + t->signe + 1))) == NULL)
 		return (NULL);
-	if (t->signe == 1)
+	while (t->umod > 0)
 	{
-		n[i] = '-';
-		i = i + 1;
-	}
-	while (t->smod > 0)
-	{
-		n[i] = b[((nb / t->smod) * (-1))];
-		nb = nb % t->smod;
-		t->smod = t->smod / base;
+		n[i] = b[(nb / t->umod)];
+		nb = nb % t->umod;
+		t->umod = t->umod / base;
 		i = i + 1;
 	}
 	n[i] = '\0';
 	return (n);
 }
-char			*ft_itoa_base(t_lli nb, t_itoa *tools, t_lli base)
+
+char			*ft_itoa_base_uns(t_ulli nb, t_itoa *tools, t_ulli base)
 {
 	char	*nbr;
 
 	tools->signe = 0;
-	if (nb >= 0)
-		nb = nb * (-1);
-	else
-		tools->signe = 1;
-	get_nb_size(nb, &(tools->smod), &(tools->size), base);
+	get_nb_size_uns(nb, &(tools->umod), &(tools->size), base);
 	if (tools->nb->type == 'X')
-		nbr = convert_nb(nb, tools, base, BASEX);
+		nbr = convert_nb_uns(nb, tools, base, BASEX);
 	else
-		nbr = convert_nb(nb, tools, base, BASEx);
+		nbr = convert_nb_uns(nb, tools, base, BASEx);
 	return (nbr);
 }

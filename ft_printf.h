@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 09:08:36 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/04 10:05:34 by jucapik          ###   ########.fr       */
+/*   Updated: 2019/01/07 15:52:09 by naali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct		s_param
 	int				apres;
 	void			*arg;
 	double			dbl;
+	long long		ui;
 }					t_param;
 
 typedef struct		s_ctof //conv to function
