@@ -6,7 +6,7 @@
 #    By: jucapik <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/15 14:01:47 by jucapik           #+#    #+#              #
-#    Updated: 2019/01/09 15:44:06 by naali            ###   ########.fr        #
+#    Updated: 2019/01/09 16:59:07 by naali            ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -16,8 +16,8 @@ CC			=	gcc
 
 CFLAGS		+=	-Wall -Wextra -Werror
 
-SRC0		=	ctof.c	ft_printf.c	maintest.c	c_param.c	p_param.c	id_param.c	o_param.c	s_param.c 	f_param.c	x_params.c\
-				param.c	get_param.c print.c	ft_itoa_base.c	ft_itoa_base_uns.c	convert_param_for_itoa.c
+SRC0		=	ctof.c	ft_printf.c	maintest.c	param.c	get_param.c print.c	ft_itoa_base.c	ft_itoa_base_uns.c	convert_param_for_itoa.c	\
+				c_param.c	p_param.c	id_param.c	o_param.c	s_param.c 	f_param.c	x_params.c	u_param.c
 
 SRCPATH0	=	.
 

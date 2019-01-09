@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 12:41:03 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/07 14:23:26 by naali            ###   ########.fr       */
+/*   Updated: 2019/01/09 16:58:07 by naali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,15 @@ t_ctof	*create_ctof(void)
 	ctof[4].f = &i_param;
 	ctof[5].conv = 'o';
 	ctof[5].f = &o_param;
-/* 	ctof[6].conv = 'u'; */
-/* 	ctof[6].f = &u_param; */
-	ctof[6].conv = 'x';
-	ctof[6].f = &x_param;
-	ctof[7].conv = 'X';
-	ctof[7].f = &X_param;
-	ctof[8].conv = 'f';
-	ctof[8].f = &f_param;
-	ctof[9].conv = 'N'; // A CHANGER OU METTRE NULL
+	ctof[6].conv = 'u';
+	ctof[6].f = &u_param;
+	ctof[7].conv = 'x';
+	ctof[7].f = &x_param;
+	ctof[8].conv = 'X';
+	ctof[8].f = &X_param;
+	ctof[9].conv = 'f';
+	ctof[9].f = &f_param;
+	ctof[10].conv = 'N'; // A CHANGER OU METTRE NULL
 	return (ctof);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 13:15:52 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/09 15:51:27 by naali            ###   ########.fr       */
+/*   Updated: 2019/01/09 17:08:07 by naali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ int		main()
 /* 	double 		shrt = -12.34; */
  	char		*bidule;
 	unsigned long int	t;
+	unsigned int	u;
 
+	u = 4294967295;
 	bidule = malloc(sizeof(char) * 42);
 	i = 5;
 	f = 42.424242424242;
@@ -54,6 +56,9 @@ int		main()
 
 	t = (unsigned long int)bidule;
 	printf("#lx --> p = %#lx <--\n", t);
+
+	printf("or --> u = %u <--\n", u);
+	ft_printf("my --> u = %u <--\n", u);
 
 //printf("--> %.125f <--\n", f);
 /* 	printf("null = %1s\n", bidule); */

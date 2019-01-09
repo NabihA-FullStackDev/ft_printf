@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   id_param.c                                         :+:      :+:    :+:   */
+/*   u_param.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: naali <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/03 15:43:52 by naali             #+#    #+#             */
-/*   Updated: 2019/01/09 16:52:12 by naali            ###   ########.fr       */
+/*   Created: 2019/01/09 16:52:05 by naali             #+#    #+#             */
+/*   Updated: 2019/01/09 16:54:19 by naali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_itoa_base.h"
 
-char		*d_param(t_param *p)
-{
-	char	*nbr;
-
-	nbr = convert_param_for_itoa(p, 10);
-	return (nbr);
-}
-
-char		*i_param(t_param *p)
+char		*u_param(t_param *p)
 {
 	char	*nbr;
 
