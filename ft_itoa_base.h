@@ -6,7 +6,7 @@
 /*   By: naali <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/21 12:03:02 by naali             #+#    #+#             */
-/*   Updated: 2019/01/09 15:48:58 by naali            ###   ########.fr       */
+/*   Updated: 2019/01/09 21:46:58 by naali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,16 @@ typedef struct		s_itoa
 	int				szbs;
 	char			*base;
 }					t_itoa;
+
+typedef struct		s_flgcheck
+{
+	char			*space;
+	char			*zero;
+	char			plus;
+	char			blank;
+	char			*tmp1;
+	char			*tmp2;
+}					t_flgcheck;
 
 char		*convert_param_for_itoa(t_param *nb, int base);
 char		*ft_itoa_base(t_lli nb, t_itoa *tools, t_lli base);

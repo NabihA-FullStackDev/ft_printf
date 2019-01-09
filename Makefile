@@ -6,7 +6,7 @@
 #    By: jucapik <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/15 14:01:47 by jucapik           #+#    #+#              #
-#    Updated: 2019/01/09 16:59:07 by naali            ###   ########.fr        #
+#    Updated: 2019/01/09 20:17:33 by naali            ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -49,6 +49,10 @@ $(NAME):	$(OBJ0)
 			@(cd $(LIBPATH) && $(MAKE))
 			$(CC) $(CFLAGS) -o $(NAME) $(OBJ0) -I $(LIBHEAD) -L $(LIBPATH) -l$(LIBNAME)
 
+noflag:		$(OBJ0)
+			@(cd $(LIBPATH) && $(MAKE))
+			$(CC) -o $(NAME) $(OBJ0) -I $(LIBHEAD) -L $(LIBPATH) -l$(LIBNAME)
+
 clean:
 			@(cd $(LIBPATH) && $(MAKE) clean)
 			rm -rf $(OBJ0)
@@ -58,3 +62,5 @@ fclean:		clean
 			rm -rf $(NAME)
 
 re:			fclean all
+
+ren:		fclean noflag

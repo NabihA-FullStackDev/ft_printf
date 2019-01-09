@@ -6,7 +6,7 @@
 /*   By: naali <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/09 15:04:35 by naali             #+#    #+#             */
-/*   Updated: 2019/01/09 17:05:52 by naali            ###   ########.fr       */
+/*   Updated: 2019/01/09 20:54:37 by naali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,30 +74,6 @@ char			*convert_param_for_itoa(t_param *nb, int base)
 	if (n.nb->type == 'u')
 		return (ft_itoa_base_uns((unsigned int)n.nb->arg, &n, n.szbs));
 	else if (n.nb->type == 'f')
-	{
 		return (convert_f_param(n));
-
-/* 		res = (n.nb->dbl / 1); */
-/* 		n.nb->dbl = (n.nb->dbl - (int)res) * 10; */
-/* 		tmp1 = ft_itoa((int)res); */
-/* 		tmp2 = tmp1; */
-/* 		if (n.nb->apres != 0) */
-/* 		{ */
-/* 			tmp1 = ft_strjoin(tmp1, "."); */
-/* 			if (tmp2 != NULL) */
-/* 				free(tmp2); */
-/* 		} */
-/* 		while (i < n.nb->apres) */
-/* 		{ */
-/* 			res = (n.nb->dbl / 1); */
-/* 			n.nb->dbl = (n.nb->dbl - (int)res) * 10; */
-/* 			tmp2 = tmp1; */
-/* 			tmp1 = ft_strjoin(tmp1, ft_itoa((int)res)); */
-/* 			if (tmp2 != NULL) */
-/* 				free(tmp2); */
-/* 			i = i + 1; */
-/* 		} */
-/* 		return (tmp1); */
-	}
 	return (NULL);
 }

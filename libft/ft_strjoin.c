@@ -3,39 +3,68 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: naali <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/10 15:45:37 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/07 13:04:23 by naali            ###   ########.fr       */
+/*   Created: 2018/11/12 15:08:08 by naali             #+#    #+#             */
+/*   Updated: 2019/01/09 22:41:24 by naali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+static char		*single_cpy(char *dst, char const *src)
 {
-	char	*res;
 	size_t	i;
-	size_t	lims1;
-	size_t	lims2;
 
-	if (s1 == NULL || s2 == NULL)
-		return (NULL);
-	lims1 = ft_strlen(s1);
-	lims2 = ft_strlen(s2);
-	if ((res = (char *)malloc(sizeof(char) * (lims1 + lims2 + 1))) == NULL)
-		return (NULL);
 	i = 0;
-	while (i < lims1)
+	if ((dst = (char*)malloc(sizeof(char) * (ft_strlen(src) + 1))) == NULL)
+		return (NULL);
+	while (src[i] != '\0')
 	{
-		res[i] = s1[i];
-		i++;
+		dst[i] = src[i];
+		i = i + 1;
 	}
-	while (i < lims1 + lims2)
+	dst[i] = '\0';
+	return (dst);
+}
+
+static char		*dbl_cpy(char *dst, char const *src1, char const *src2)
+{
+	size_t		i;
+	size_t		j;
+
+	i = 0;
+	j = 0;
+	if ((dst = (char*)malloc(sizeof(char) * (ft_strlen(src1) +
+												ft_strlen(src2) + 1))) == NULL)
+		return (NULL);
+	while (src1[i] != '\0')
 	{
-		res[i] = s2[i - lims1];
-		i++;
+		dst[i] = src1[i];
+		i = i + 1;
 	}
-	res[i] = '\0';
-	return (res);
+	while (src2[j] != '\0')
+	{
+		dst[i + j] = src2[j];
+		j = j + 1;
+	}
+	dst[i + j] = '\0';
+	return (dst);
+}
+
+char			*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*str;
+
+	str = NULL;
+	if (s1 == NULL && s2 == NULL)
+		return (NULL);
+	if (s2 == NULL)
+		str = single_cpy(str, s1);
+	else if (s1 == NULL)
+		str = single_cpy(str, s2);
+	else
+		str = dbl_cpy(str, s1, s2);
+	return (str);
 }
