@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/16 12:04:21 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/07 12:54:32 by naali            ###   ########.fr       */
+/*   Updated: 2019/01/10 08:55:32 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,7 @@ bln				get_flagopt(t_param *param, const char *format, int *i)
 		param->flags |= plus;
 	}
 	else if (format[*i] == ' ')
-	{
-		if (param->type != 'p' && !(param->flags & plus))
-			param->flags |= espace;
-	}
+		param->flags |= espace;
 	else
 	{
 		--(*i);
@@ -89,8 +86,6 @@ bln				get_vals(t_param *param, const char *format, int *i)
 	else if ((format[*i] >= '0' && format[*i] <= '9'))
 	{
 		param->avant = ft_atoi(format + (*i));
-		if (param->flags & moins)
-			param->avant *= -1;
 		while ((format[*i] >= '0' && format[*i] <= '9') || format[*i] == '-')
 			++(*i);
 	}
@@ -123,9 +118,10 @@ bln				get_type(t_param *param, const char *format, int *i)
 		param->apres = 6;
 	else if (param->apres == -1 && param->type != 'f')
 		param->apres = 0;
-	// a ajouter quand les options d,i,o... sont ajoutes TODO
-	//if (checkwholenum(param) == TRUE && param->avant != 0)
-	//	param->flags &= ~zero;
+	if (checkwholenum(param) == TRUE && param->avant != 0)
+		param->flags &= ~zero;
+	if (param->type == 'p' && param->flags & plus)
+		param->flags &= ~espace;
 	++(*i);
 	return (ret);
 }
