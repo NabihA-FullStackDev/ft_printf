@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/16 12:04:21 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/10 08:55:32 by jucapik          ###   ########.fr       */
+/*   Updated: 2019/01/11 10:43:38 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ bln				get_flagopt(t_param *param, const char *format, int *i)
 	}
 	else if (format[*i] == ' ')
 		param->flags |= espace;
+	else if (format[*i] == '.' && (format[(*i) + 1] < '0' || format[(*i) + 1] > '9'))
+		param->flags |= point;
 	else
 	{
 		--(*i);
@@ -88,18 +90,31 @@ bln				get_vals(t_param *param, const char *format, int *i)
 		param->avant = ft_atoi(format + (*i));
 		while ((format[*i] >= '0' && format[*i] <= '9') || format[*i] == '-')
 			++(*i);
+		if (format[*i] == '.' && (format[(*i) + 1] < '0' || format[(*i) + 1] > '9'))
+		{
+			param->flags |= point;
+			++(*i);
+		}
 	}
 	else
 		ret = FALSE;
 	return (ret);
 }
 
-bln		checkwholenum(t_param *param)
+static void			check_f(t_param *param)
 {
-	if (param->type == 'd' || param->type == 'i' || param->type == 'o' ||
-			param->type == 'u' || param->type == 'x' || param->type == 'X')
-		return (TRUE);
-	return (FALSE);
+	if (param->type == 'f')
+	{
+		param->flags &= ~h;
+		param->flags &= ~hh;
+		param->flags &= ~l;
+		param->flags &= ~ll;
+	}
+	else
+	{
+		param->flags &= ~L;
+		param->flags &= ~point;
+	}
 }
 
 bln				get_type(t_param *param, const char *format, int *i)
@@ -118,10 +133,13 @@ bln				get_type(t_param *param, const char *format, int *i)
 		param->apres = 6;
 	else if (param->apres == -1 && param->type != 'f')
 		param->apres = 0;
-	if (checkwholenum(param) == TRUE && param->avant != 0)
+	if ((param->type == 'd' || param->type == 'i' || param->type == 'o' ||
+			param->type == 'u' || param->type == 'x' || param->type == 'X')
+			&& param->avant != 0)
 		param->flags &= ~zero;
 	if (param->type == 'p' && param->flags & plus)
 		param->flags &= ~espace;
+	check_f(param);
 	++(*i);
 	return (ret);
 }

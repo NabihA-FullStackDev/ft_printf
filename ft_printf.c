@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 10:46:52 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/10 08:33:03 by jucapik          ###   ########.fr       */
+/*   Updated: 2019/01/11 11:07:52 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,11 @@ int			modif_pos(int pos, const char *format)
 {
 	++pos;
 	while (format[pos] == '#' || format[pos] == '-' || format[pos] == '+'
-			|| format[pos] == '0' || format[pos] == 'h' || format[pos] == 'l'
-			|| format[pos] == 'L' || format[pos] == ' ')
+			|| format[pos] == '0' || format[pos] == ' ')
 		++pos;
 	while ((format[pos] >= '0' && format[pos] <= '9') || format[pos] == '.')
+		++pos;
+	while (format[pos] == 'h' || format[pos] == 'l' || format[pos] == 'L')
 		++pos;
 	++pos;
 	return (pos);
@@ -77,6 +78,9 @@ static void TESTFUN(t_param *param)
 		printf("\tplus options up for %d\n", param->id);
 	if (param->flags & espace)
 		printf("\tespace options up for %d\n", param->id);
+	if (param->flags & point)
+		printf("\tpoint options up for %d\n", param->id);
+	printf("\ttype %c for %d\n", param->type, param->id);
 	if (param->avant != 0)
 		printf("\tavant = %d de %d\n", param->avant, param->id);
 	if (param->apres != 0)
@@ -144,7 +148,7 @@ int			ft_printf(const char *format, ...)
 	{
 		params[i].arg = NULL;
 		if (params[i].type == 'f')
-			params[i].dbl = (double)va_arg(ap, double);
+			params[i].dbl = (long double)va_arg(ap, long double);
 		else if (params[i].type == 'p')
 			params[i].ui = (long long)va_arg(ap, long long);
 		else

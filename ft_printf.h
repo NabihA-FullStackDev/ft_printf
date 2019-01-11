@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 09:08:36 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/07 15:52:09 by naali            ###   ########.fr       */
+/*   Updated: 2019/01/11 11:07:37 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef enum		s_flags
 	moins = 128,
 	plus = 256,
 	espace = 512,
+	point = 1024,
 }					t_flags;
 
 typedef struct		s_param
@@ -42,7 +43,7 @@ typedef struct		s_param
 	int				avant;
 	int				apres;
 	void			*arg;
-	double			dbl;
+	long double		dbl;
 	long long		ui;
 }					t_param;
 
