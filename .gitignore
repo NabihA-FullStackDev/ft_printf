@@ -3,3 +3,6 @@
 main.c
 tstflags
 *.dSYM
+libft/libft.a
+libft/*.o
+test
