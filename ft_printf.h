@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 09:08:36 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/11 11:07:37 by jucapik          ###   ########.fr       */
+/*   Updated: 2019/01/11 13:57:57 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef enum		s_flags
 typedef struct		s_param
 {
 	int				id; //numero du parametre
-	char			type; //si c'est %c, %c, %p... etc
+	char			type; //si c'est %c, %s, %p... etc
 	int				flags;
 	int				avant;
 	int				apres;
@@ -65,6 +65,9 @@ void	get_flaglen(t_param *param, const char *format, int *i);
 bln		get_flagopt(t_param *param, const char *format, int *i);
 bln		get_vals(t_param *param, const char *format, int *i);
 bln		get_type(t_param *param, const char *format, int *i);
+void	add_format(char **nbr, t_param *p);
+void	add_format_helper(char **nbr, t_param *p, int size);
+bln		signe(char *tofill, int *i, t_param *p);
 char	*c_param(t_param *param); //un caractere unique
 char	*s_param(t_param *param); //une chaine de caracteres
 char	*p_param(t_param *param); //un pointeur (en hexa)
