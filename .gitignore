@@ -6,3 +6,4 @@ tstflags
 libft/libft.a
 libft/*.o
 test
+maintest.c
