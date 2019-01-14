@@ -6,13 +6,14 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 09:06:56 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/11 16:37:23 by jucapik          ###   ########.fr       */
+/*   Updated: 2019/01/14 16:27:36 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "FdF.h"
+#include "ft_printf.h"
+#include "libft/libft.h"
 
-static char	*case1(char *nbr, int big)
+static char	*case1(char **nbr, int big, t_param *p)
 {
 	char	*tmp;
 	char	*tofill;
@@ -23,13 +24,13 @@ static char	*case1(char *nbr, int big)
 	signe(tofill, &i, p);
 	while (i < big)
 		tofill[i++] = '0';
-	tmp = ft_strjoin(tofill, nbr);
-	ft_memdel(tofill);
-	ft_memdel(nbr);
+	tmp = ft_strjoin(tofill, *nbr);
+	ft_memdel((void **)&tofill);
+	ft_memdel((void **)nbr);
 	return (tmp);
 }
 
-static char *case2(char *nbr, int big, t_param *p)
+static char *case2(char **nbr, int big, t_param *p)
 {
 	char	*tmp;
 	char	*tofill;
@@ -41,24 +42,25 @@ static char *case2(char *nbr, int big, t_param *p)
 	i = -1;
 	while (++i < size)
 		tofill[i] = ' ';
-	tmp = ft_strjoin(nbr, tofill);
-	ft_memdel(tofill);
-	ft_memdel(nbr);
+	tmp = ft_strjoin(*nbr, tofill);
+	ft_memdel((void **)&tofill);
+	ft_memdel((void **)nbr);
 	return (tmp);
 }
 
 
-char		*add_format_helper(char *nbr, t_param *p, int size)
+char		**add_format_helper(char **nbr, t_param *p, int size)
 {
-	char	*tmp;
 	int		big;
 
 	big = p->apres - size;
 	big += (p->flags & neg || p->flags & plus || p->flags & espace) ? 1 : 0;
 	if (big > 0)
-		nbr = case1(nbr, big);
-	big = ft_strlen(nbr);
+		(*nbr) = case1(nbr, big, p);
+	else
+		(*nbr) = add_signe(nbr, p, size);
+	big = ft_strlen(*nbr);
 	if (p->avant > big)
-		nbr = case2(nbr, big, p);
+		(*nbr) = case2(nbr, big, p);
 	return (nbr);
 }
