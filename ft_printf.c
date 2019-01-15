@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 10:46:52 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/11 11:07:52 by jucapik          ###   ########.fr       */
+/*   Updated: 2019/01/15 09:56:10 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ int			print_all(const char *format, t_ctof *ctof_tab, t_param *params)
 	size = ft_strlen(to_print);
 	write(1, to_print, size);
 	free(to_print);
+	//TODO return -1 si y'a des erreurs
 	return (size);
 }
 

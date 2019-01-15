@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/16 12:04:21 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/11 10:43:38 by jucapik          ###   ########.fr       */
+/*   Updated: 2019/01/15 13:36:14 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ bln				get_vals(t_param *param, const char *format, int *i)
 	return (ret);
 }
 
-static void			check_f(t_param *param)
+static void			check_en_plus(t_param *param)
 {
 	if (param->type == 'f')
 	{
@@ -111,9 +111,11 @@ static void			check_f(t_param *param)
 		param->flags &= ~ll;
 	}
 	else
-	{
 		param->flags &= ~L;
-		param->flags &= ~point;
+	if (param->flags & zero && !(param->flags & point) && param->apres == -1)
+	{
+		param->apres = param->avant;
+		param->avant = 0;
 	}
 }
 
@@ -131,15 +133,9 @@ bln				get_type(t_param *param, const char *format, int *i)
 	param->type = format[*i];
 	if (param->apres == -1 && param->type == 'f')
 		param->apres = 6;
-	else if (param->apres == -1 && param->type != 'f')
-		param->apres = 0;
-	if ((param->type == 'd' || param->type == 'i' || param->type == 'o' ||
-			param->type == 'u' || param->type == 'x' || param->type == 'X')
-			&& param->avant != 0)
-		param->flags &= ~zero;
 	if (param->type == 'p' && param->flags & plus)
 		param->flags &= ~espace;
-	check_f(param);
+	check_en_plus(param);
 	++(*i);
 	return (ret);
 }

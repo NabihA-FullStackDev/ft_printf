@@ -6,12 +6,32 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 09:06:56 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/14 16:27:36 by jucapik          ###   ########.fr       */
+/*   Updated: 2019/01/15 09:41:56 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft/libft.h"
+
+
+char        *add_signe(char **nbr, t_param *p, int size)
+{
+	char    *tofill;
+	int     i;
+
+	i = (p->flags & neg || p->flags & plus || p->flags & espace) ? 1 : 0;
+	if (i == 1)
+	{
+		tofill = ft_strnew(size + 1);
+		i = 0;
+		signe(tofill, &i, p);
+		ft_strcpy(tofill + 1, *nbr);
+		ft_memdel((void **)nbr);
+		return (tofill);
+	}
+	else
+		return (*nbr);
+}
 
 static char	*case1(char **nbr, int big, t_param *p)
 {

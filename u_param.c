@@ -6,7 +6,7 @@
 /*   By: naali <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/09 16:52:05 by naali             #+#    #+#             */
-/*   Updated: 2019/01/09 16:54:19 by naali            ###   ########.fr       */
+/*   Updated: 2019/01/15 09:19:36 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,6 @@ char		*u_param(t_param *p)
 	char	*nbr;
 
 	nbr = convert_param_for_itoa(p, 10);
+	nbr = add_format(&nbr, p);
 	return (nbr);
 }

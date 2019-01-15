@@ -6,7 +6,7 @@
 #    By: jucapik <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/12 14:23:08 by jucapik           #+#    #+#              #
-#    Updated: 2019/01/02 11:12:10 by jucapik          ###   ########.fr        #
+#    Updated: 2019/01/15 12:05:27 by jucapik          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ SRCS = ft_memalloc.c ft_bzero.c ft_memmove.c ft_memcpy.c \
 	   ft_putnbr_fd.c ft_strdel.c ft_lstnew.c ft_lstdelone.c \
 	   ft_lstdel.c ft_lstadd.c ft_lstiter.c ft_lstmap.c \
 	   ft_strlen_s.c ft_strcpy_s.c ft_memccpy_s.c ft_memset_s.c \
-	   ft_lstaddend.c ft_strndup.c ft_abs.c
+	   ft_lstaddend.c ft_strndup.c ft_abs.c ft_strinsert.c
 
 BNRY = ft_memalloc.o ft_bzero.o ft_memmove.o ft_memcpy.o \
 	   ft_memccpy.o ft_memset.o ft_memchr.o ft_memchr.o \
@@ -48,7 +48,7 @@ BNRY = ft_memalloc.o ft_bzero.o ft_memmove.o ft_memcpy.o \
 	   ft_putnbr_fd.o ft_strdel.o ft_lstnew.o ft_lstdelone.o \
 	   ft_lstdel.o ft_lstadd.o ft_lstiter.o ft_lstmap.o \
 	   ft_strlen_s.o ft_strcpy_s.o ft_memccpy_s.o ft_memset_s.o \
-	   ft_lstaddend.o ft_strndup.o ft_abs.o
+	   ft_lstaddend.o ft_strndup.o ft_abs.o ft_strinsert.o
 
 all: $(NAME)
 

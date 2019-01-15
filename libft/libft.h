@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 19:10:19 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/02 11:11:45 by jucapik          ###   ########.fr       */
+/*   Updated: 2019/01/15 12:00:50 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ char			*ft_strtrim(char const *s);
 char			**ft_strsplit(char const *s, char c);
 char			*ft_itoa(int n);
 char			*ft_strndup(const char *s1, size_t n);
+char			*ft_strinsert(char *small, char *large, int pos);
 size_t			ft_strlcat(char *dst, const char *src, size_t size);
 size_t			ft_strlen(const char *s);
 int				ft_isalpha(int c);
