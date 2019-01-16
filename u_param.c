@@ -6,17 +6,18 @@
 /*   By: naali <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/09 16:52:05 by naali             #+#    #+#             */
-/*   Updated: 2019/01/15 09:19:36 by jucapik          ###   ########.fr       */
+/*   Updated: 2019/01/16 12:42:06 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_itoa_base.h"
+#include <unistd.h>
 
 char		*u_param(t_param *p)
 {
 	char	*nbr;
 
+	write(2, "up\n", 3); 
 	nbr = convert_param_for_itoa(p, 10);
-	nbr = add_format(&nbr, p);
 	return (nbr);
 }

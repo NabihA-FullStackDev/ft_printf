@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 10:46:52 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/15 09:56:10 by jucapik          ###   ########.fr       */
+/*   Updated: 2019/01/16 12:49:33 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,21 +81,18 @@ static void TESTFUN(t_param *param)
 	if (param->flags & point)
 		printf("\tpoint options up for %d\n", param->id);
 	printf("\ttype %c for %d\n", param->type, param->id);
-	if (param->avant != 0)
-		printf("\tavant = %d de %d\n", param->avant, param->id);
-	if (param->apres != 0)
-		printf("\tapres = %d de %d\n", param->apres, param->id);
+	printf("\tavant = %d pour %d\n", param->avant, param->id);
+	printf("\tapres = %d pour %d\n", param->apres, param->id);
 	printf("\tflags = ");
-	int c = 9, k, n = param->flags;
+	int c = 9, k = param->flags, n = param->flags;
 	while (c >= 0)
 	{
-		k = n >> c;
-
 		if (k & 1)
 			printf("1");
 		else
 			printf("0");
 		c--;
+		k = n >> c;
 	}
 	printf("\n");
 }
@@ -113,17 +110,21 @@ int			print_all(const char *format, t_ctof *ctof_tab, t_param *params)
 	to_print = (char *)malloc(sizeof(char) * 1);
 	to_print[0] = '\0';
 	nb_param = get_nb_param(format);
+	write(1, "1\n", 2);
 	while (i < nb_param)
 	{
+		write(1, "2\n", 2);
 		swap_print_string(&to_print, &pos, format);
+		write(1, "3\n", 2);
 		swap_print_param(&to_print, ctof_tab, params + i);
+		write(1, "4\n", 2);
 		pos = modif_pos(pos, format);
 		//TMP TEST
 				TESTFUN(params + i);
 		++i;
 	}
+	write(1, "5\n", 2);
 	swap_print_string(&to_print, &pos, format);
-	free_ctof(ctof_tab);
 	free_param(params);
 	size = ft_strlen(to_print);
 	write(1, to_print, size);
@@ -134,13 +135,13 @@ int			print_all(const char *format, t_ctof *ctof_tab, t_param *params)
 
 int			ft_printf(const char *format, ...)
 {
-	t_ctof	*ctof_tab;
+	t_ctof	ctof_tab[11];
 	t_param	*params;
 	int		nb_param;
 	int		i;
 	va_list	ap;
 
-	ctof_tab = create_ctof();
+	create_ctof(ctof_tab);
 	params = create_param(format);
 	nb_param = get_nb_param(format);
 	i = 0;

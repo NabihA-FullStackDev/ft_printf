@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 09:34:19 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/15 14:16:13 by jucapik          ###   ########.fr       */
+/*   Updated: 2019/01/16 12:53:31 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,70 +15,63 @@
 
 #include <stdio.h>
 
-bln			signe(char *tofill, int *i, t_param *p)
-{
-	if (p->flags & neg)
-		tofill[(*i)++] = '-';
-	else if (p->flags & plus)
-		tofill[(*i)++] = '+';
-	else if (p->flags & espace)
-		tofill[(*i)++] = ' ';
-	else
-		return (FALSE);
-	return (TRUE);
-}
-
-static char	*case2(char **nbr, t_param *p, int size)
+char	*add_zeros(char *nbr, t_param *p, int *size)
 {
 	char	*tofill;
 	char	*tmp;
-	int		big;
-	int		check;
+	int		nbz;
 	int		i;
 
-	big = (p->apres > p->avant) ? p->apres - size : p->avant - size;
-	check = ((p->type == 'x' || p->type == 'X') && p->flags & hash) ? 2 : 0;
-	big += check;
-	printf("big = %d, size = %d\n", big, size);
-	tofill = ft_strnew(big - size + 1);
 	i = 0;
-	if (p->avant > p->apres)
-		while (i < p->avant - p->apres - 2 && i < p->avant - size - 2)
-			tofill[i++] = ' ';
-	if ((p->type == 'x' || p->type == 'X') && p->flags & hash)
-	{
-		tofill[i++] = '0';
-		tofill[i++] = (p->type == 'x') ? 'x' : 'X';
-	}
-	else if (p->avant > p->apres)
-	{
-		tofill[i++] = ' ';
-		if (signe(tofill, &i, p) == FALSE)
-			tofill[i++] = ' ';
-	}
-	while (i < p->apres - size + check)
+	printf("p->type = %c, size = %d\n", p->type, *size);
+	if (p->flags & zero && !(p->flags & moins)
+			&& p->apres == -1 && p->avant > *size)
+		nbz = p->avant - *size;
+	else if (p->apres > *size)
+		nbz = p->apres - *size;
+	else
+		return (nbr);
+	tofill = ft_strnew(nbz);
+	while (i < nbz)
 		tofill[i++] = '0';
 	tofill[i] = '\0';
-	printf("i = %d, tofill = %s\n", i, tofill);
-	tmp = ft_strjoin(tofill, *nbr);
+	tmp = ft_strjoin(tofill, nbr);
+	ft_memdel((void **)&nbr);
 	ft_memdel((void **)&tofill);
-	ft_memdel((void **)nbr);
+	*size += nbz;
+	return (tmp);
+}// TODO where is the segfault with %04d
+
+char	*add_type(char *nbr, t_param *p)
+{
+	char	*tofill;
+	char	*tmp;
+
+	tofill = ft_strnew(2);
+	tofill[0] = '0';
+	if ((p->type == 'x' || p->type == 'X') && p->flags & hash)
+	{
+		tofill[1] = (p->type == 'x') ? 'x' : 'X';
+		tofill[2] = '\0';
+	}
+	else if (p->flags & hash && p->type == 'o')
+		tofill[1] = '\0';
+	else
+		return (nbr);
+	tmp = ft_strjoin(tofill, nbr);
+	ft_memdel((void **)&nbr);
+	ft_memdel((void **)&tofill);
 	return (tmp);
 }
 
-char		*add_format(char **nbr, t_param *p)
+char		*add_format(char *nbr, t_param *p)
 {
 	int		size;
 
-	size = ft_strlen(*nbr);
-	if (!(p->flags & moins))
-	{
-		if (p->avant > 0 || p->apres > 0)
-			(*nbr) = case2(nbr, p, size);
-		else
-			(*nbr) = add_signe(nbr, p, size);
-	}
-	else
-		add_format_helper(nbr, p, size);
-	return (*nbr);
+	size = ft_strlen(nbr);
+	nbr = add_zeros(nbr, p, &size);
+	//nbr = add_type(nbr, p);
+	//nbr = add_spaces(nbr, p, size);
+	(void)p;
+	return (nbr);
 }

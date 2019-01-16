@@ -6,18 +6,18 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 12:41:03 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/09 16:58:07 by naali            ###   ########.fr       */
+/*   Updated: 2019/01/16 12:48:21 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "ft_printf.h"
 
-t_ctof	*create_ctof(void)
+void create_ctof(t_ctof *ctof)
 {
-	t_ctof	*ctof;
+	//t_ctof	*ctof;
 
-	ctof = (t_ctof *)malloc(sizeof(t_ctof) * 11); // 10 mais le 11eme a NULL
+	//ctof = (t_ctof *)malloc(sizeof(t_ctof) * 11); // 10 mais le 11eme a NULL
 	ctof[0].conv = 'c';
 	ctof[0].f = &c_param;
 	ctof[1].conv = 's';
@@ -39,11 +39,5 @@ t_ctof	*create_ctof(void)
 	ctof[9].conv = 'f';
 	ctof[9].f = &f_param;
 	ctof[10].conv = 'N'; // A CHANGER OU METTRE NULL
-	return (ctof);
-}
-
-void    free_ctof(t_ctof *ctof)
-{
-	free(ctof);
-	ctof = NULL;
+	//return (ctof);
 }

@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/16 12:04:21 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/15 13:36:14 by jucapik          ###   ########.fr       */
+/*   Updated: 2019/01/16 10:12:31 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,11 +112,6 @@ static void			check_en_plus(t_param *param)
 	}
 	else
 		param->flags &= ~L;
-	if (param->flags & zero && !(param->flags & point) && param->apres == -1)
-	{
-		param->apres = param->avant;
-		param->avant = 0;
-	}
 }
 
 bln				get_type(t_param *param, const char *format, int *i)
@@ -131,7 +126,9 @@ bln				get_type(t_param *param, const char *format, int *i)
 	else
 		ret = FALSE;
 	param->type = format[*i];
-	if (param->apres == -1 && param->type == 'f')
+	if (param->flags & point)
+		param->apres = 0;
+	else if (param->apres == -1 && param->type == 'f')
 		param->apres = 6;
 	if (param->type == 'p' && param->flags & plus)
 		param->flags &= ~espace;

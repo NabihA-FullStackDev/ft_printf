@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 13:53:20 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/03 09:22:50 by jucapik          ###   ########.fr       */
+/*   Updated: 2019/01/16 11:43:07 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char	*s_param(t_param *param)
 	int		towrite;
 	int		abs_avant;
 
+	write(2, "sp\n", 3);
 	abs_avant = ft_abs(param->avant);
 	s = (param->arg == NULL) ? ft_strdup("(null)") : (char *)param->arg;
 	towrite = (param->apres > (int)ft_strlen(s) || param->apres == 0) ?

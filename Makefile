@@ -6,7 +6,7 @@
 #    By: jucapik <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/15 14:01:47 by jucapik           #+#    #+#              #
-#    Updated: 2019/01/15 12:10:05 by jucapik          ###   ########.fr        #
+#    Updated: 2019/01/15 15:44:49 by jucapik          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -20,7 +20,7 @@ SRC0		=	ctof.c	ft_printf.c	maintest.c	param.c	get_param.c \
 				print.c	ft_itoa_base.c	ft_itoa_base_uns.c	\
 				convert_param_for_itoa.c c_param.c	p_param.c	id_param.c	\
 				o_param.c	s_param.c 	f_param.c	x_params.c	u_param.c \
-				add_format.c add_format_helper.c
+				add_format.c
 
 SRCPATH0	=	.
 

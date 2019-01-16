@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 09:27:38 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/04 09:31:22 by jucapik          ###   ########.fr       */
+/*   Updated: 2019/01/16 12:55:08 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ char		*print_string(const char *str, int *pos)
 
 char		*print_param(t_ctof *ctof, t_param *param)
 {
+	char	*res;
 	int		i;
 
 	i = 0;
@@ -89,5 +90,7 @@ char		*print_param(t_ctof *ctof, t_param *param)
 		i++;
 	if (ctof[i].conv == 'N')
 		return (chartostr(param->type));
-	return (ctof[i].f(param));
+	res = ctof[i].f(param);
+	//res = add_format(res, param);
+	return (res);
 }

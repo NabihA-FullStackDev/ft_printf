@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 09:08:36 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/14 16:28:08 by jucapik          ###   ########.fr       */
+/*   Updated: 2019/01/16 12:48:37 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,8 @@ typedef struct		s_ctof //conv to function
 
 int		ft_printf(const char *format, ...);
 t_param	*create_param(const char *format);
-t_ctof	*create_ctof(void); //renvois la table d'options a fonction
+void	create_ctof(t_ctof *ctof); //renvois la table d'options a fonction
 int		get_nb_param(const char *format);
-void	free_ctof(t_ctof *ctof);
 void	free_param(t_param *tab);
 char	*print_string(const char *str, int *pos);
 char	*print_param(t_ctof *ctof, t_param *param);
@@ -66,10 +65,7 @@ void	get_flaglen(t_param *param, const char *format, int *i);
 bln		get_flagopt(t_param *param, const char *format, int *i);
 bln		get_vals(t_param *param, const char *format, int *i);
 bln		get_type(t_param *param, const char *format, int *i);
-char	*add_format(char **nbr, t_param *p);
-char	**add_format_helper(char **nbr, t_param *p, int size);
-char	*add_signe(char **nbr, t_param *p, int size);
-bln		signe(char *tofill, int *i, t_param *p);
+char	*add_format(char *nbr, t_param *p);
 char	*c_param(t_param *param); //un caractere unique
 char	*s_param(t_param *param); //une chaine de caracteres
 char	*p_param(t_param *param); //un pointeur (en hexa)
