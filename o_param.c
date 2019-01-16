@@ -6,7 +6,7 @@
 /*   By: naali <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 14:01:12 by naali             #+#    #+#             */
-/*   Updated: 2019/01/16 12:41:57 by jucapik          ###   ########.fr       */
+/*   Updated: 2019/01/16 13:02:38 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ char		*o_param(t_param *p)
 {
 	char	*nbr;
 
-	write(2, "op\n", 3); 
 	nbr = convert_param_for_itoa(p, 8);
 	return (nbr);
 }

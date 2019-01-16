@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 09:34:19 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/16 12:53:31 by jucapik          ###   ########.fr       */
+/*   Updated: 2019/01/16 13:02:01 by jucapik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ char	*add_zeros(char *nbr, t_param *p, int *size)
 	int		i;
 
 	i = 0;
-	printf("p->type = %c, size = %d\n", p->type, *size);
 	if (p->flags & zero && !(p->flags & moins)
 			&& p->apres == -1 && p->avant > *size)
 		nbz = p->avant - *size;
