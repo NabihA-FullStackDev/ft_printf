@@ -6,53 +6,53 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/10 16:40:24 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/16 14:37:23 by naali            ###   ########.fr       */
+/*   Updated: 2019/01/16 16:43:06 by naali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdio.h>
+#include "libft/libft.h"
 
-static int	getnblen(int n)
+static int	getnblen(double n, int *signe, double *mod)
 {
 	int i;
 
 	i = 1;
-//	if (n < 0)
-//		i++;
-	if (-10 < n && n < 10)
-		return (i);
-	while (-10 >= n || n >= 10)
+	*signe = 0;
+	*mod = 1;
+	if (n < 0)
+		*signe = 1;
+//	else
+//		n = n * -1;
+	printf("%.0f\n", *mod);
+	while (n > 10)
 	{
 		n /= 10;
+		*mod = *mod * 10;
 		i++;
 	}
+	printf("%.0f\n", *mod);
 	return (i);
 }
 
-char		*ft_itoa(int n)
+char		*ft_itoa_dbl(double n)
 {
-	int		size;
-	char	*res;
 	int		i;
+	char	*res;
 	int		signe;
+	double	mod;
 
-//	if (n == -2147483648)
-//		return (ft_strdup("-2147483648"));
-	size = getnblen(n);
-	res = (char *)malloc(sizeof(char) * (size + 1));
-	if (res == NULL)
-		return (NULL);
-	i = size - 1;
-	signe = (n < 0) ? -1 : 1;
-	if (n < 0)
-		n = -n;
-	while (i >= 0)
+	i = 0;
+	res = (char*)malloc(sizeof(char) * (getnblen(n, &signe, &mod) + signe + 1));
+	while (mod > 0.000001)
 	{
-		res[i--] = n % 10 + '0';
-		n /= 10;
+ 		res[i] = (int)(n / mod) + '0';
+//		printf("%d", (int)(n/mod));
+		while (n >= mod)
+			n = n - mod;
+		mod = mod / 10;
+		i = i + 1;
 	}
-//	if (signe == -1)
-//		res[0] = '-';
-	res[size] = '\0';
+	res[i] = '\0';
 	return (res);
 }

@@ -6,7 +6,7 @@
 /*   By: naali <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/03 13:34:12 by naali             #+#    #+#             */
-/*   Updated: 2019/01/16 11:42:18 by jucapik          ###   ########.fr       */
+/*   Updated: 2019/01/16 14:11:36 by naali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,6 @@ char		*f_param(t_param *p)
 {
 	char	*nbr;
 
-	write(2, "fp\n", 3);
 	nbr = convert_param_for_itoa(p, 10);
 	nbr = check_flags(p, nbr, ft_strlen(nbr));
 	return (nbr);

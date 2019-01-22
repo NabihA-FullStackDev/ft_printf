@@ -6,7 +6,7 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 10:46:52 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/16 12:49:33 by jucapik          ###   ########.fr       */
+/*   Updated: 2019/01/19 14:43:09 by naali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int			modif_pos(int pos, const char *format)
 	return (pos);
 }
 
-static void TESTFUN(t_param *param)
+void TESTFUN(t_param *param)
 {
 	printf("flags for param number %d:\n", param->id);
 	if (param->flags & hh)
@@ -110,20 +110,15 @@ int			print_all(const char *format, t_ctof *ctof_tab, t_param *params)
 	to_print = (char *)malloc(sizeof(char) * 1);
 	to_print[0] = '\0';
 	nb_param = get_nb_param(format);
-	write(1, "1\n", 2);
 	while (i < nb_param)
 	{
-		write(1, "2\n", 2);
 		swap_print_string(&to_print, &pos, format);
-		write(1, "3\n", 2);
 		swap_print_param(&to_print, ctof_tab, params + i);
-		write(1, "4\n", 2);
 		pos = modif_pos(pos, format);
 		//TMP TEST
-				TESTFUN(params + i);
+//				TESTFUN(params + i);
 		++i;
 	}
-	write(1, "5\n", 2);
 	swap_print_string(&to_print, &pos, format);
 	free_param(params);
 	size = ft_strlen(to_print);
@@ -150,7 +145,7 @@ int			ft_printf(const char *format, ...)
 	{
 		params[i].arg = NULL;
 		if (params[i].type == 'f')
-			params[i].dbl = (long double)va_arg(ap, long double);
+			params[i].dbl = (double)va_arg(ap, double);
 		else if (params[i].type == 'p')
 			params[i].ui = (long long)va_arg(ap, long long);
 		else

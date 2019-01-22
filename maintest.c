@@ -6,12 +6,13 @@
 /*   By: jucapik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 13:15:52 by jucapik           #+#    #+#             */
-/*   Updated: 2019/01/16 12:53:17 by jucapik          ###   ########.fr       */
+/*   Updated: 2019/01/19 14:00:11 by naali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <float.h>
+#include <limits.h>
 
 #include "ft_printf.h"
 #include "libft/libft.h"
@@ -29,11 +30,13 @@ int		main()
 	u = 4294967295;
 	bidule = malloc(sizeof(char) * 42);
 	i = 5;
-	f = 42.424242424242;
+	f = 0.42424242424242424242;
+//	f = 0.3000999;
 
-	printf("or -->%04d<--\n", 10);
-	ft_printf("my -->%6.f<--\n", f);
-
+//	printf("or -->%-8.10o<--\n", -10);
+	printf("or -->%1.2147483635f<--\n", DBL_MAX);
+//	ft_printf("my -->%8.10o<--\n", -10);
+	ft_printf("my -->%f<--\n", DBL_MAX);
 
 /* 	ft_printf("abcde --> %5.2s <-- fgi --> %c %c <-- jklmn --> %s <--\n", NULL, '5', '5', "91011"); */
 /* 	ft_printf("--> %d <--\n", 010); */
